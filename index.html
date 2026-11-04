@@ -1,0 +1,4515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pão Duro Finanças • O Amigo do seu Bolso & Assistente Inteligente</title>
+  <meta name="description" content="Pão Duro Finanças: Controle financeiro inteligente, teto semanal e reserva garantida na 4ª semana com o assistente Trocado. Economize sem aperto!">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg">
+  
+  <style>
+    /* DESIGN SYSTEM: Clean Modern Fintech (Dark & Light Friendly, Mobile-First) */
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #131b2e;
+      --bg-card-hover: #1e293b;
+      --bg-surface: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      --border-color: #334155;
+      --border-subtle: #1e293b;
+      
+      --brand-primary: #10b981;
+      --brand-primary-light: #34d399;
+      --brand-primary-glow: rgba(16, 185, 129, 0.15);
+      
+      --color-gain: #10b981;
+      --color-gain-bg: rgba(16, 185, 129, 0.12);
+      --color-expense: #f43f5e;
+      --color-expense-bg: rgba(244, 63, 94, 0.12);
+      --color-invest: #8b5cf6;
+      --color-invest-bg: rgba(139, 92, 246, 0.12);
+      --color-reserve: #f59e0b;
+      --color-reserve-bg: rgba(245, 158, 11, 0.12);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 12px -1px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    [data-theme="light"] {
+      --bg-main: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      --bg-surface: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #94a3b8;
+      --border-color: #cbd5e1;
+      --border-subtle: #e2e8f0;
+      --brand-primary-glow: rgba(16, 185, 129, 0.1);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Container & Layout */
+    .app-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 90px; /* Space for mobile nav */
+    }
+
+    @media (min-width: 768px) {
+      .app-wrapper {
+        padding: 24px;
+        padding-bottom: 40px;
+      }
+    }
+
+    /* Header */
+    header.app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0 20px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 20px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-tag {
+      font-size: 0.7rem;
+      background: var(--brand-primary-glow);
+      color: var(--brand-primary-light);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-icon {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-icon:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: var(--brand-primary);
+    }
+
+    /* Month Selector Pill */
+    .month-picker-container {
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      padding: 4px 12px;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .month-picker-container select {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.9rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* ASSISTANT BANNER (PROACTIVE INSIGHT) */
+    .assistant-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .assistant-banner::after {
+      content: "";
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 90px;
+      height: 90px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .assistant-avatar {
+      width: 42px;
+      height: 42px;
+      background: var(--brand-primary);
+      color: white;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .assistant-content {
+      flex: 1;
+    }
+
+    .assistant-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .assistant-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--brand-primary-light);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .assistant-text {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .assistant-text strong {
+      color: var(--text-main);
+    }
+
+    .assistant-action-btn {
+      margin-top: 10px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--brand-primary);
+      color: var(--brand-primary-light);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .assistant-action-btn:hover {
+      background: var(--brand-primary);
+      color: #0b0f19;
+    }
+
+    /* STATS OVERVIEW CARDS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 992px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat-card.reserve-highlight {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, var(--bg-card) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .stat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .stat-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .stat-value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .stat-subtext {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* THE GOLDEN RULE CARD: REGRA DA 4ª SEMANA */
+    .rule-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .rule-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .rule-title-group h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rule-title-group p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .rule-badge {
+      background: var(--color-reserve-bg);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+    }
+
+    /* 4 Weeks Pacing Timeline */
+    .weeks-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .weeks-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+    }
+
+    .week-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .week-box.current-week {
+      border: 2px solid var(--brand-primary);
+      box-shadow: 0 0 12px var(--brand-primary-glow);
+    }
+
+    .week-box.golden-week {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, var(--bg-surface) 100%);
+      border: 1.5px dashed rgba(245, 158, 11, 0.5);
+    }
+
+    .week-box.golden-week.current-week {
+      border: 2px solid #f59e0b;
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.3);
+    }
+
+    .week-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .week-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .week-dates {
+      font-size: 0.7rem;
+      color: var(--text-subtle);
+    }
+
+    .week-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .week-spent {
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .week-ceiling {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Progress bar */
+    .progress-bar-container {
+      width: 100%;
+      height: 7px;
+      background: var(--bg-main);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 0.4s ease;
+    }
+
+    .progress-safe { background: #10b981; }
+    .progress-warn { background: #f59e0b; }
+    .progress-danger { background: #f43f5e; }
+    .progress-gold { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+    .week-status-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    /* SECTION TABS (Visão App vs Visão Planilha) */
+    .view-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--bg-card);
+      color: var(--brand-primary-light);
+      border: 1px solid var(--border-color);
+    }
+
+    .tab-btn:hover:not(.active) {
+      background: var(--bg-surface);
+      color: var(--text-main);
+    }
+
+    /* TWO-COLUMN DASHBOARD SECTION (Transactions + Analytics) */
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 992px) {
+      .dashboard-layout {
+        grid-template-columns: 1.6fr 1.1fr;
+      }
+    }
+
+    /* Card Panels */
+    .panel-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .panel-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Filters Pill Row */
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      scrollbar-width: none;
+    }
+
+    .filter-pills::-webkit-scrollbar { display: none; }
+
+    .pill-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .pill-btn.active {
+      background: var(--brand-primary);
+      color: #0b0f19;
+      border-color: var(--brand-primary);
+    }
+
+    /* Transactions List */
+    .tx-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .tx-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .tx-item:hover {
+      background: var(--bg-card-hover);
+      transform: translateX(2px);
+    }
+
+    .tx-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tx-icon-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .tx-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tx-desc {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .tx-meta {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tx-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: right;
+    }
+
+    .tx-amount {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .tx-amount.gain { color: var(--color-gain); }
+    .tx-amount.expense { color: var(--color-expense); }
+    .tx-amount.invest { color: var(--color-invest); }
+
+    .btn-delete-tx {
+      background: transparent;
+      border: none;
+      color: var(--text-subtle);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+
+    .btn-delete-tx:hover {
+      color: var(--color-expense);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--text-muted);
+    }
+
+    .empty-state-icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+      opacity: 0.8;
+    }
+
+    /* SPREADSHEET TABLE VIEW (Modo Planilha Completa) */
+    .sheet-view {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    .sheet-view.active {
+      display: block;
+    }
+
+    .sheet-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .sheet-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-sheet {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-sheet:hover {
+      background: var(--brand-primary);
+      color: #0b0f19;
+      border-color: var(--brand-primary);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+
+    .data-table th {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .data-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover);
+    }
+
+    .tag-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    /* DONUT CHART & CATEGORY PROGRESS */
+    .chart-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    .svg-donut-wrapper {
+      position: relative;
+      width: 190px;
+      height: 190px;
+    }
+
+    .donut-center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .donut-center-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .donut-center-value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .category-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    .category-bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .category-bar-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+    }
+
+    /* FLOATING ACTION BUTTON (MOBILE-FIRST) */
+    .fab-btn {
+      position: fixed;
+      bottom: 84px;
+      right: 20px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45);
+      border: none;
+      cursor: pointer;
+      z-index: 90;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .fab-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 10px 28px rgba(16, 185, 129, 0.6);
+    }
+
+    @media (min-width: 768px) {
+      .fab-btn {
+        bottom: 30px;
+        right: 30px;
+      }
+    }
+
+    /* BOTTOM NAV BAR (MOBILE) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      z-index: 80;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (min-width: 768px) {
+      .bottom-nav {
+        display: none;
+      }
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: var(--radius-md);
+      transition: color 0.15s;
+    }
+
+    .nav-item.active {
+      color: var(--brand-primary-light);
+    }
+
+    .nav-item svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* MODAL WINDOWS */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 480px;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(20px);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-backdrop.show .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Modal Transaction Type Tabs */
+    .tx-type-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 18px;
+      background: var(--bg-main);
+      padding: 4px;
+      border-radius: var(--radius-md);
+    }
+
+    .type-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 9px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .type-btn.active.expense {
+      background: var(--color-expense-bg);
+      color: var(--color-expense);
+    }
+
+    .type-btn.active.gain {
+      background: var(--color-gain-bg);
+      color: var(--color-gain);
+    }
+
+    .type-btn.active.invest {
+      background: var(--color-invest-bg);
+      color: var(--color-invest);
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .form-input, .form-select {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 11px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--brand-primary);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 13px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      transition: opacity 0.2s;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.92;
+    }
+
+    /* QUICK CHIPS / FAQ FOR ASSISTANT */
+    .assistant-chat-bubble {
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-bottom: 14px;
+      border-left: 3px solid var(--brand-primary);
+    }
+
+    .assistant-prompts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .prompt-chip {
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+
+    .prompt-chip:hover {
+      border-color: var(--brand-primary);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e293b;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--brand-primary);
+      z-index: 200;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ========================================================
+       POPOVERS COM GRÁFICOS INTUITIVOS NAS 4 STAT CARDS
+       ======================================================== */
+    .stat-card {
+      position: relative;
+    }
+
+    .stat-card:hover,
+    .stat-card:focus-within,
+    .stat-card.active-popover {
+      z-index: 60;
+    }
+
+    .stat-icon-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .stat-chart-hint {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      transition: all 0.2s;
+    }
+
+    .stat-card:hover .stat-chart-hint,
+    .stat-icon-wrapper:hover .stat-chart-hint {
+      background: var(--brand-primary-glow);
+      color: var(--brand-primary-light);
+      border-color: var(--brand-primary);
+      transform: scale(1.04);
+    }
+
+    .stat-popover {
+      position: absolute;
+      top: calc(100% + 10px);
+      width: 360px;
+      max-width: calc(100vw - 32px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 18px 40px -4px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
+      pointer-events: none;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      backdrop-filter: blur(16px);
+    }
+
+    /* Popover Tooltip Arrow */
+    .stat-popover::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      width: 12px;
+      height: 12px;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-color);
+      border-top: 1px solid var(--border-color);
+      transform: rotate(45deg);
+    }
+
+    /* Default left alignment for cards 1 & 2 */
+    .stat-popover.popover-align-left {
+      left: 0;
+      right: auto;
+    }
+    .stat-popover.popover-align-left::before {
+      left: 28px;
+    }
+
+    /* Right alignment for cards 3 & 4 */
+    .stat-popover.popover-align-right {
+      right: 0;
+      left: auto;
+    }
+    .stat-popover.popover-align-right::before {
+      right: 28px;
+    }
+
+    @media (max-width: 991px) {
+      .stat-popover.popover-align-tablet-right {
+        right: 0;
+        left: auto;
+      }
+      .stat-popover.popover-align-tablet-right::before {
+        right: 28px;
+        left: auto;
+      }
+      .stat-popover.popover-align-tablet-left {
+        left: 0;
+        right: auto;
+      }
+      .stat-popover.popover-align-tablet-left::before {
+        left: 28px;
+        right: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .stat-popover {
+        position: fixed;
+        left: 16px !important;
+        right: 16px !important;
+        width: auto !important;
+        max-width: none !important;
+        top: auto !important;
+        bottom: 90px !important;
+        transform: translateY(12px);
+      }
+      .stat-popover::before {
+        display: none;
+      }
+    }
+
+    /* Hover & Active triggers */
+    .stat-card:hover .stat-popover,
+    .stat-card:focus-within .stat-popover,
+    .stat-card.active-popover .stat-popover {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Popover Content Layouts */
+    .popover-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .popover-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .popover-icon {
+      font-size: 1.3rem;
+    }
+
+    .popover-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .popover-sub {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .popover-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+    }
+    .popover-badge.gain {
+      background: var(--color-gain-bg);
+      color: var(--color-gain);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .popover-badge.expense {
+      background: var(--color-expense-bg);
+      color: var(--color-expense);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+    .popover-badge.gold {
+      background: var(--color-reserve-bg);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .popover-badge.info {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .popover-highlight-pill {
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .popover-highlight-pill.danger {
+      border-left: 3px solid var(--color-expense);
+    }
+    .popover-highlight-pill.gain {
+      border-left: 3px solid var(--color-gain);
+    }
+    .popover-highlight-pill.gold {
+      border-left: 3px solid #fbbf24;
+    }
+
+    /* Stacked Waterfall Chart (Saldo Idealizado) */
+    .waterfall-track {
+      height: 18px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      overflow: hidden;
+      display: flex;
+      margin-bottom: 8px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .waterfall-segment {
+      height: 100%;
+      transition: width 0.3s ease;
+      position: relative;
+    }
+    .waterfall-segment.fixed { background: #f59e0b; }
+    .waterfall-segment.var { background: #f43f5e; }
+    .waterfall-segment.inv { background: #8b5cf6; }
+    .waterfall-segment.net { background: #10b981; }
+
+    .chart-legend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+      font-size: 0.72rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Rows list in popovers */
+    .popover-breakdown-table {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .breakdown-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      background: var(--bg-surface);
+    }
+    .breakdown-line.total {
+      font-weight: 700;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 8px;
+      margin-top: 2px;
+      background: transparent;
+    }
+
+    /* Mini Progress Bars inside Popover */
+    .mini-bar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .mini-bar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .mini-bar-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+    .mini-bar-track {
+      height: 6px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .mini-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 0.3s;
+    }
+
+    /* 4 Weeks Pacing Roadmap in Reserve Popover */
+    .roadmap-weeks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+    .roadmap-week-item {
+      background: var(--bg-surface);
+      padding: 8px 10px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+    .roadmap-week-item.active {
+      border-color: var(--brand-primary);
+      background: rgba(16, 185, 129, 0.08);
+    }
+    .roadmap-week-item.gold {
+      border: 1px dashed rgba(245, 158, 11, 0.5);
+      background: rgba(245, 158, 11, 0.08);
+    }
+    .roadmap-week-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    /* Trocado Tip Bubble */
+    .trocado-tip-bubble {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+    .trocado-tip-avatar {
+      font-size: 1.3rem;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4));
+    }
+    .trocado-tip-text {
+      font-size: 0.75rem;
+      line-height: 1.4;
+      color: var(--text-main);
+    }
+    .trocado-tip-text strong {
+      color: #fbbf24;
+    }
+
+    .popover-btn-link {
+      width: 100%;
+      margin-top: 10px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%);
+      border: 1px solid var(--brand-primary);
+      color: var(--brand-primary-light);
+      padding: 8px;
+      border-radius: var(--radius-md);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .popover-btn-link:hover {
+      background: var(--brand-primary);
+      color: #0b0f19;
+    }
+
+    /* Assistant Banner Actions Group */
+    .assistant-actions-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .assistant-action-btn.btn-make-money {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.3) 100%);
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+    .assistant-action-btn.btn-make-money:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    /* ========================================================
+       MODAL: COMO FAZER DINHEIRO & YOUTUBE PLAYLIST
+       ======================================================== */
+    .youtube-hero-box {
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.18) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .youtube-hero-box::after {
+      content: '▶';
+      position: absolute;
+      right: 15px;
+      bottom: -10px;
+      font-size: 80px;
+      color: rgba(239, 68, 68, 0.08);
+      pointer-events: none;
+      font-weight: 900;
+    }
+    .youtube-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .youtube-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .youtube-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+    .youtube-cta-btn {
+      background: #ef4444;
+      color: #ffffff;
+      border: none;
+      font-size: 0.88rem;
+      font-weight: 800;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .youtube-cta-btn:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.55);
+    }
+    .youtube-config-toggle {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-left: 12px;
+      transition: color 0.2s;
+    }
+    .youtube-config-toggle:hover {
+      color: var(--text-main);
+    }
+
+    .playlist-config-box {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(239, 68, 68, 0.3);
+      display: none;
+    }
+    .playlist-config-box.open {
+      display: block;
+    }
+
+    /* Opportunity Cards Grid */
+    .opportunities-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    @media (min-width: 600px) {
+      .opportunities-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .opp-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .opp-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--brand-primary);
+    }
+    .opp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .opp-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .opp-badge {
+      font-size: 0.68rem;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--color-gain);
+      font-weight: 700;
+    }
+    .opp-desc {
+      font-size: 0.77rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .opp-platforms {
+      font-size: 0.72rem;
+      color: var(--brand-primary-light);
+      margin-top: 2px;
+    }
+
+    /* Extra Income Growth Simulator */
+    .extra-simulator-card {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, var(--bg-surface) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+    .extra-sim-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--brand-primary-light);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .extra-sim-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+    .extra-sim-col {
+      background: var(--bg-card);
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+    }
+    .extra-sim-col small {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: block;
+    }
+    .extra-sim-col strong {
+      font-size: 0.88rem;
+      color: #fbbf24;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ========================================================
+       AUTH SCREEN (LOGIN & CADASTRO DE ACESSO AO PÃO DURO)
+       ======================================================== */
+    .auth-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 15%, rgba(16, 185, 129, 0.16) 0%, rgba(11, 15, 25, 0.98) 75%);
+      background-color: var(--bg-main);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-y: auto;
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    }
+
+    .auth-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.97);
+      pointer-events: none;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      position: relative;
+      margin: auto;
+    }
+
+    .auth-brand {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .auth-logo-badge {
+      width: 68px;
+      height: 68px;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #10b981 100%);
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
+      margin-bottom: 12px;
+    }
+
+    .auth-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .auth-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .auth-trocado-greeting {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 0.78rem;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .auth-tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 9px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .auth-tab-btn.active {
+      background: var(--bg-card);
+      color: var(--brand-primary-light);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .password-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-input-wrapper input {
+      padding-right: 42px !important;
+    }
+
+    .btn-toggle-pwd {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      color: var(--text-subtle);
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+      padding: 4px;
+    }
+    .btn-toggle-pwd:hover {
+      color: var(--text-main);
+    }
+
+    .auth-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      margin: 14px 0 18px 0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .auth-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .auth-link {
+      color: var(--brand-primary-light);
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .auth-link:hover {
+      text-decoration: underline;
+    }
+
+    .demo-creds-box {
+      margin-top: 18px;
+      padding: 10px 12px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--border-color);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .demo-creds-box:hover {
+      border-color: var(--brand-primary);
+    }
+    .demo-creds-box code {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--color-gain);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-family: monospace;
+    }
+
+    .auth-security-footer {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--text-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUTHENTICATION SCREEN (LOGIN & CADASTRO) -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="auth-logo-badge">🥖💰</div>
+        <h1 class="auth-title">
+          Pão Duro <span class="brand-tag">Finanças</span>
+        </h1>
+        <p class="auth-subtitle">O cofre seguro do seu dinheiro • Acesse para continuar</p>
+      </div>
+
+      <!-- Trocado Welcoming Dialogue -->
+      <div class="auth-trocado-greeting">
+        <span style="font-size: 1.5rem; line-height: 1;">🪙</span>
+        <div>
+          <strong>Trocado na porta do cofre:</strong><br>
+          "Seu dinheiro está guardado a sete chaves! Entre com seu login e senha para gerenciar suas economias."
+        </div>
+      </div>
+
+      <!-- Tabs: Login vs Cadastrar -->
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="tabAuthLogin" onclick="switchAuthTab('login')">
+          🔑 Entrar no Cofre
+        </button>
+        <button type="button" class="auth-tab-btn" id="tabAuthRegister" onclick="switchAuthTab('register')">
+          ✨ Criar Nova Conta
+        </button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="authLoginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label" for="loginUser">Usuário ou E-mail</label>
+          <input type="text" class="form-input" id="loginUser" placeholder="Ex: admin ou seu@email.com" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Senha de Acesso</label>
+          <div class="password-input-wrapper">
+            <input type="password" class="form-input" id="loginPassword" placeholder="Sua senha secreta" required autocomplete="current-password">
+            <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('loginPassword', this)" title="Mostrar / Ocultar Senha">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-actions-row">
+          <label class="auth-checkbox-label">
+            <input type="checkbox" id="loginRemember" checked>
+            <span>Lembrar de mim</span>
+          </label>
+          <a class="auth-link" onclick="forgotPasswordPrompt()">Esqueci minha senha</a>
+        </div>
+
+        <button type="submit" class="btn-submit" style="margin-top: 4px; font-weight: 800; font-size: 0.95rem; background: var(--brand-primary); color: #0b0f19;">
+          🚀 Entrar no Pão Duro Finanças
+        </button>
+
+        <!-- Quick Demo Credentials helper -->
+        <div class="demo-creds-box" onclick="fillDemoCredentials()" title="Clique para autopreencher!">
+          💡 <strong>Acesso Rápido de Teste:</strong> Usuário <code>admin</code> • Senha <code>paoduro123</code>
+          <div style="font-size: 0.7rem; color: var(--brand-primary-light); margin-top: 3px;">(Clique aqui para preencher automaticamente)</div>
+        </div>
+      </form>
+
+      <!-- REGISTER FORM (CRIAR CONTA) -->
+      <form id="authRegisterForm" onsubmit="handleRegister(event)" style="display: none;">
+        <div class="form-group">
+          <label class="form-label" for="regName">Seu Nome / Como prefere ser chamado</label>
+          <input type="text" class="form-input" id="regName" placeholder="Ex: Maria, Carlos, Patrícia..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regUser">Usuário ou E-mail de Acesso</label>
+          <input type="text" class="form-input" id="regUser" placeholder="Ex: carlos@email.com ou carlos10" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regIncome">Renda Mensal Média Estimada (R$)</label>
+          <input type="number" step="0.01" class="form-input" id="regIncome" placeholder="Ex: 3500.00" value="3500.00" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Criar Senha</label>
+          <div class="password-input-wrapper">
+            <input type="password" class="form-input" id="regPassword" placeholder="Mínimo 4 caracteres" minlength="4" required autocomplete="new-password">
+            <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('regPassword', this)" title="Mostrar / Ocultar Senha">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regConfirmPassword">Confirmar Senha</label>
+          <div class="password-input-wrapper">
+            <input type="password" class="form-input" id="regConfirmPassword" placeholder="Repita a senha criada" minlength="4" required autocomplete="new-password">
+            <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('regConfirmPassword', this)" title="Mostrar / Ocultar Senha">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" style="margin-top: 8px; font-weight: 800; font-size: 0.95rem; background: var(--brand-primary); color: #0b0f19;">
+          ✨ Criar Conta & Abrir Cofre
+        </button>
+      </form>
+
+      <div class="auth-security-footer">
+        <span>🔒</span>
+        <span>100% Privativo & Offline. Seus dados e senha ficam protegidos no seu aparelho.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- APP HEADER -->
+    <header class="app-header">
+      <div class="brand-group">
+        <div class="brand-logo" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #10b981 100%); font-size: 20px;">🥖💰</div>
+        <div>
+          <div class="brand-title">
+            Pão Duro
+            <span class="brand-tag">Finanças</span>
+          </div>
+          <small style="color: var(--text-subtle); font-size: 0.72rem;">O amigo do seu bolso • Economia inteligente sem aperto</small>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Month Selector -->
+        <div class="month-picker-container">
+          <span>📅</span>
+          <select id="monthSelect" onchange="changeMonth(this.value)">
+            <!-- Options populated dynamically -->
+          </select>
+        </div>
+
+        <!-- Setup Profile Button -->
+        <button class="btn-icon" onclick="openProfileModal()" title="Configurações e Renda" aria-label="Perfil">
+          ⚙️
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="btn-icon" onclick="toggleTheme()" title="Alternar Modo Escuro/Claro" aria-label="Tema">
+          🌓
+        </button>
+
+        <!-- Lock / Logout Button -->
+        <button class="btn-icon" onclick="logout()" title="Bloquear Cofre / Sair da Conta" aria-label="Sair">
+          🔒
+        </button>
+      </div>
+    </header>
+
+    <!-- ASSISTANT BANNER (SMART INSIGHT COM TROCADO) -->
+    <section class="assistant-banner">
+      <div class="assistant-avatar" style="font-size: 26px; display:flex; align-items:center; justify-content:center;">🪙</div>
+      <div class="assistant-content">
+        <div class="assistant-header">
+          <span class="assistant-title">✨ Trocado • Seu Assistente Pão Duro</span>
+          <span id="currentDayBadge" style="font-size: 0.72rem; color: var(--text-subtle);"></span>
+        </div>
+        <p class="assistant-text" id="assistantMessage">
+          Calculando diagnóstico financeiro da sua semana com o Trocado...
+        </p>
+        <div class="assistant-actions-group">
+          <button class="assistant-action-btn" onclick="openAssistantModal()">
+            💬 Falar com o Trocado
+          </button>
+          <button class="assistant-action-btn btn-make-money" onclick="openMakeMoneyModal()">
+            🚀 Como Fazer Dinheiro (Aulas)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS OVERVIEW CARDS COM POPOVERS INTUITIVOS -->
+    <section class="stats-grid">
+      <!-- Balance Card -->
+      <div class="stat-card" id="cardBalance" onmouseenter="showStatPopover('balance')" onmouseleave="hideStatPopover('balance')" onclick="toggleStatPopover('balance')">
+        <div class="stat-card-header">
+          <span class="stat-label">Saldo em Caixa</span>
+          <div class="stat-icon-wrapper" title="Passe o mouse ou toque para ver onde o saldo foi idealizado">
+            <span class="stat-icon" style="background: rgba(148, 163, 184, 0.15);">💰</span>
+            <span class="stat-chart-hint">📊 Raio-X</span>
+          </div>
+        </div>
+        <div class="stat-value" id="totalBalance">R$ 0,00</div>
+        <div class="stat-subtext" id="balanceStatus">Ganhos - Gastos - Investimentos</div>
+
+        <!-- Popover: Onde o Saldo foi Idealizado -->
+        <div class="stat-popover popover-align-left popover-align-tablet-left" id="popoverBalance">
+          <div id="popoverBalanceContent">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Incomes Card -->
+      <div class="stat-card" id="cardGains" onmouseenter="showStatPopover('gains')" onmouseleave="hideStatPopover('gains')" onclick="toggleStatPopover('gains')">
+        <div class="stat-card-header">
+          <span class="stat-label">Ganhos</span>
+          <div class="stat-icon-wrapper" title="Passe o mouse ou toque para ver onde mais ganhou">
+            <span class="stat-icon" style="background: var(--color-gain-bg); color: var(--color-gain);">⬆️</span>
+            <span class="stat-chart-hint">📊 Vertentes</span>
+          </div>
+        </div>
+        <div class="stat-value" style="color: var(--color-gain);" id="totalGains">R$ 0,00</div>
+        <div class="stat-subtext" id="incomeSubtext">Renda estimada: R$ 0,00</div>
+
+        <!-- Popover: Onde Mais Ganhei -->
+        <div class="stat-popover popover-align-left popover-align-tablet-right" id="popoverGains">
+          <div id="popoverGainsContent">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Expenses Card -->
+      <div class="stat-card" id="cardExpenses" onmouseenter="showStatPopover('expenses')" onmouseleave="hideStatPopover('expenses')" onclick="toggleStatPopover('expenses')">
+        <div class="stat-card-header">
+          <span class="stat-label">Gastos Totais</span>
+          <div class="stat-icon-wrapper" title="Passe o mouse ou toque para ver onde mais gastou">
+            <span class="stat-icon" style="background: var(--color-expense-bg); color: var(--color-expense);">⬇️</span>
+            <span class="stat-chart-hint">📊 Onde Mais Gastei</span>
+          </div>
+        </div>
+        <div class="stat-value" style="color: var(--color-expense);" id="totalExpenses">R$ 0,00</div>
+        <div class="stat-subtext" id="expensePacingSubtext">0% do teto mensal</div>
+
+        <!-- Popover: Onde Mais Gastei -->
+        <div class="stat-popover popover-align-right popover-align-tablet-left" id="popoverExpenses">
+          <div id="popoverExpensesContent">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Golden Reserve Card -->
+      <div class="stat-card reserve-highlight" id="cardReserve" onmouseenter="showStatPopover('reserve')" onmouseleave="hideStatPopover('reserve')" onclick="toggleStatPopover('reserve')">
+        <div class="stat-card-header">
+          <span class="stat-label" style="color: #fbbf24;">Reserva da 4ª Sem</span>
+          <div class="stat-icon-wrapper" title="Passe o mouse ou toque para ver como chegar na 4ª semana com dinheiro no bolso">
+            <span class="stat-icon" style="background: var(--color-reserve-bg); color: #fbbf24;">🔒</span>
+            <span class="stat-chart-hint" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">📊 Como Chegar</span>
+          </div>
+        </div>
+        <div class="stat-value" style="color: #fbbf24;" id="reserveProtectedVal">R$ 0,00</div>
+        <div class="stat-subtext" id="reserveTargetText">Meta: R$ 0,00 garantidos</div>
+
+        <!-- Popover: Como Chego na 4ª Semana com Dinheiro no Bolso -->
+        <div class="stat-popover popover-align-right popover-align-tablet-right" id="popoverReserve">
+          <div id="popoverReserveContent">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE GOLDEN METHOD: 4 WEEKS PACING -->
+    <section class="rule-card">
+      <div class="rule-header">
+        <div class="rule-title-group">
+          <h2>🗓️ Método Pão Duro da 4ª Semana: Reserva Garantida no Bolso</h2>
+          <p>Dividimos seus gastos nas 3 primeiras semanas para que a última semana chegue com sobra garantida no bolso!</p>
+        </div>
+        <span class="rule-badge" id="ruleReserveBadge">Meta: 20% guardados</span>
+      </div>
+
+      <div class="weeks-grid" id="weeksGridContainer">
+        <!-- Week 1 Box -->
+        <div class="week-box" id="weekBox1">
+          <div class="week-header">
+            <span class="week-name">Semana 1</span>
+            <span class="week-dates">Dias 01 a 07</span>
+          </div>
+          <div class="week-metrics">
+            <span class="week-spent" id="w1Spent">R$ 0,00</span>
+            <span class="week-ceiling" id="w1Ceiling">Teto: R$ 0,00</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-fill progress-safe" id="w1Bar" style="width: 0%;"></div>
+          </div>
+          <span class="week-status-badge" id="w1Status">Em andamento</span>
+        </div>
+
+        <!-- Week 2 Box -->
+        <div class="week-box" id="weekBox2">
+          <div class="week-header">
+            <span class="week-name">Semana 2</span>
+            <span class="week-dates">Dias 08 a 14</span>
+          </div>
+          <div class="week-metrics">
+            <span class="week-spent" id="w2Spent">R$ 0,00</span>
+            <span class="week-ceiling" id="w2Ceiling">Teto: R$ 0,00</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-fill progress-safe" id="w2Bar" style="width: 0%;"></div>
+          </div>
+          <span class="week-status-badge" id="w2Status">Aguardando</span>
+        </div>
+
+        <!-- Week 3 Box -->
+        <div class="week-box" id="weekBox3">
+          <div class="week-header">
+            <span class="week-name">Semana 3</span>
+            <span class="week-dates">Dias 15 a 21</span>
+          </div>
+          <div class="week-metrics">
+            <span class="week-spent" id="w3Spent">R$ 0,00</span>
+            <span class="week-ceiling" id="w3Ceiling">Teto: R$ 0,00</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-fill progress-safe" id="w3Bar" style="width: 0%;"></div>
+          </div>
+          <span class="week-status-badge" id="w3Status">Aguardando</span>
+        </div>
+
+        <!-- Week 4 Box (The Reserve Vault) -->
+        <div class="week-box golden-week" id="weekBox4">
+          <div class="week-header">
+            <span class="week-name" style="color: #fbbf24;">✨ 4ª Sem: Reserva</span>
+            <span class="week-dates">Dias 22 ao Fim</span>
+          </div>
+          <div class="week-metrics">
+            <span class="week-spent" style="color: #fbbf24;" id="w4Saved">R$ 0,00</span>
+            <span class="week-ceiling" id="w4Ceiling">Cofre Protegido</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-fill progress-gold" id="w4Bar" style="width: 100%;"></div>
+          </div>
+          <span class="week-status-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;" id="w4Status">
+            Cofre Blindado 🛡️
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION SWITCHER (App vs Planilha) -->
+    <div class="view-tabs">
+      <button class="tab-btn active" id="tabAppView" onclick="switchView('app')">
+        📱 Visão App (Dashboard)
+      </button>
+      <button class="tab-btn" id="tabSheetView" onclick="switchView('sheet')">
+        📊 Visão Planilha (Excel & Edição)
+      </button>
+    </div>
+
+    <!-- VIEW 1: APP DASHBOARD LAYOUT -->
+    <div id="appViewContainer" class="dashboard-layout">
+      <!-- LEFT: Transactions Feed with Filters -->
+      <section class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>📝</span>
+            <span>Histórico de Lançamentos</span>
+          </div>
+          <button class="btn-sheet" onclick="openTransactionModal()">
+            <span>➕ Novo</span>
+          </button>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="filter-pills">
+          <button class="pill-btn active" onclick="filterTransactions('all', this)">Todos</button>
+          <button class="pill-btn" onclick="filterTransactions('gasto', this)">Gastos</button>
+          <button class="pill-btn" onclick="filterTransactions('ganho', this)">Ganhos</button>
+          <button class="pill-btn" onclick="filterTransactions('investimento', this)">Investimentos</button>
+          <button class="pill-btn" onclick="filterTransactions('w1', this)">Semana 1</button>
+          <button class="pill-btn" onclick="filterTransactions('w2', this)">Semana 2</button>
+          <button class="pill-btn" onclick="filterTransactions('w3', this)">Semana 3</button>
+          <button class="pill-btn" onclick="filterTransactions('w4', this)">Semana 4</button>
+        </div>
+
+        <!-- Transactions List -->
+        <div class="tx-list" id="transactionList">
+          <!-- Dynamic transaction items inserted here -->
+        </div>
+      </section>
+
+      <!-- RIGHT: Donut Chart & Category Distribution -->
+      <section class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>📊</span>
+            <span>Distribuição de Gastos</span>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <div class="svg-donut-wrapper">
+            <svg id="donutSvg" width="190" height="190" viewBox="0 0 100 100"></svg>
+            <div class="donut-center-text">
+              <div class="donut-center-label">Total Gasto</div>
+              <div class="donut-center-value" id="donutTotalText">R$ 0</div>
+            </div>
+          </div>
+
+          <div class="category-bars" id="categoryBarsContainer">
+            <!-- Dynamic Category percentage bars -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: FULL SPREADSHEET (MODO PLANILHA EXCEL) -->
+    <div id="sheetViewContainer" class="sheet-view">
+      <div class="sheet-toolbar">
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 700;">📊 Planilha Geral de Movimentações</h2>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Visualização tabular idêntica ao Excel, com exportação e controle total.</p>
+        </div>
+        <div class="sheet-actions">
+          <button class="btn-sheet" onclick="exportToCSV()">
+            📥 Exportar para Excel (.CSV)
+          </button>
+          <button class="btn-sheet" onclick="exportJSONBackup()">
+            💾 Fazer Backup (JSON)
+          </button>
+          <button class="btn-sheet" onclick="document.getElementById('importFileInput').click()">
+            📂 Restaurar Backup
+          </button>
+          <input type="file" id="importFileInput" style="display: none;" accept=".json" onchange="importJSONBackup(event)">
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Tipo</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Semana</th>
+            <th>Método</th>
+            <th>Valor (R$)</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="sheetTableBody">
+          <!-- Dynamic table rows -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FLOATING ACTION BUTTON (ADD RECORD) -->
+  <button class="fab-btn" onclick="openTransactionModal()" title="Novo Lançamento" aria-label="Adicionar Gasto, Ganho ou Investimento">
+    +
+  </button>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" id="mNavHome" onclick="switchView('app')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      Início
+    </button>
+    <button class="nav-item" onclick="openAssistantModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      Trocado
+    </button>
+    <button class="nav-item" id="mNavSheet" onclick="switchView('sheet')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+      Planilha
+    </button>
+    <button class="nav-item" onclick="openProfileModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      Ajustes
+    </button>
+  </nav>
+
+  <!-- MODAL: ADD TRANSACTION -->
+  <div class="modal-backdrop" id="txModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="txModalTitle">Adicionar Lançamento</h3>
+        <button class="modal-close-btn" onclick="closeTransactionModal()">✕</button>
+      </div>
+
+      <!-- Type Select: Gasto, Ganho, Investimento -->
+      <div class="tx-type-selector">
+        <button type="button" class="type-btn active expense" id="btnTypeExpense" onclick="setTxType('gasto')">
+          🔴 Gasto
+        </button>
+        <button type="button" class="type-btn gain" id="btnTypeGain" onclick="setTxType('ganho')">
+          🟢 Ganho
+        </button>
+        <button type="button" class="type-btn invest" id="btnTypeInvest" onclick="setTxType('investimento')">
+          🟣 Investir
+        </button>
+      </div>
+
+      <form id="txForm" onsubmit="saveTransaction(event)">
+        <input type="hidden" id="txId">
+        <input type="hidden" id="txType" value="gasto">
+
+        <div class="form-group">
+          <label class="form-label" for="txAmount">Valor (R$)*</label>
+          <input type="number" step="0.01" min="0.01" class="form-input" id="txAmount" placeholder="Ex: 54,90" required style="font-size: 1.25rem; font-weight: 700;">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="txDesc">Descrição / Estabelecimento*</label>
+          <input type="text" class="form-input" id="txDesc" placeholder="Ex: Supermercado, Aluguel, Salário..." required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="txCategory">Categoria</label>
+            <select class="form-select" id="txCategory" required>
+              <!-- Categorias de Gasto padrão -->
+              <option value="Alimentação">🍔 Alimentação</option>
+              <option value="Moradia">🏠 Moradia (Contas)</option>
+              <option value="Transporte">🚗 Transporte</option>
+              <option value="Saúde">💊 Saúde & Cuidados</option>
+              <option value="Lazer">🎉 Lazer & Diversão</option>
+              <option value="Educação">📚 Educação</option>
+              <option value="Compras">🛍️ Compras Pessoais</option>
+              <option value="Outros">📦 Outros</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="txDate">Data*</label>
+            <input type="date" class="form-input" id="txDate" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="txMethod">Forma de Pagamento</label>
+          <select class="form-select" id="txMethod">
+            <option value="Pix">⚡ Pix</option>
+            <option value="Cartão de Crédito">💳 Cartão de Crédito</option>
+            <option value="Cartão de Débito">💳 Cartão de Débito</option>
+            <option value="Dinheiro">💵 Dinheiro</option>
+            <option value="Transferência">🏦 Transferência / Boleto</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnSubmitTx">
+          Salvar Lançamento
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: PROFILE & CONFIG (RENDA E RESERVA) -->
+  <div class="modal-backdrop" id="profileModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">⚙️ Perfil & Regra da Reserva</h3>
+        <button class="modal-close-btn" onclick="closeProfileModal()">✕</button>
+      </div>
+
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
+        Defina sua renda e a meta de economia para que o Pão Duro Finanças calcule quanto você pode gastar por semana sem comprometer sua reserva final.
+      </p>
+
+      <form id="profileForm" onsubmit="saveProfile(event)">
+        <div class="form-group">
+          <label class="form-label" for="userName">Seu Nome / Apelido</label>
+          <input type="text" class="form-input" id="userName" placeholder="Ex: Maria, Carlos..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="userIncome">Renda Mensal Estimada (R$)</label>
+          <input type="number" step="0.01" class="form-input" id="userIncome" placeholder="Ex: 3500.00" required>
+          <small style="color: var(--text-subtle); font-size: 0.72rem;">Salário ou receita média mensal.</small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reservePercent">Meta da Reserva da 4ª Semana (%)</label>
+          <select class="form-select" id="reservePercent">
+            <option value="10">10% da Renda (Iniciante)</option>
+            <option value="15">15% da Renda (Moderado)</option>
+            <option value="20" selected>20% da Renda (Recomendado - Método Ouro)</option>
+            <option value="25">25% da Renda (Avançado / Poupador Extremo)</option>
+            <option value="30">30% da Renda (Foco em Liberdade Financeira)</option>
+          </select>
+          <small style="color: #fbbf24; font-size: 0.75rem; margin-top: 4px; display: block;" id="reserveEstimateCalculated">
+            Estimativa: R$ 700,00 guardados no fim do mês.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="fixedExpenses">Gastos Fixos Mensais Conhecidos (R$)</label>
+          <input type="number" step="0.01" class="form-input" id="fixedExpenses" placeholder="Ex: 1200.00 (Aluguel, Luz, Internet...)">
+          <small style="color: var(--text-subtle); font-size: 0.72rem;">Opcional: gastos que já estão comprometidos.</small>
+        </div>
+
+        <div style="margin: 16px 0 10px 0; padding-top: 12px; border-top: 1px dashed var(--border-color);">
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+            <span>🔐 Senha de Acesso ao Cofre</span>
+            <button type="button" class="btn-sheet" style="font-size: 0.72rem; padding: 3px 8px;" onclick="toggleChangePasswordBox()">
+              Alterar Senha
+            </button>
+          </div>
+          <div id="changePasswordBox" style="display: none; flex-direction: column; gap: 8px;">
+            <input type="password" class="form-input" id="profileNewPassword" placeholder="Nova senha (mínimo 4 caracteres)">
+            <input type="password" class="form-input" id="profileConfirmNewPassword" placeholder="Confirme a nova senha">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Salvar Configurações
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ASSISTANT CHAT & TIPS (TROCADO) -->
+  <div class="modal-backdrop" id="assistantModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">🪙 Trocado - Seu Amigo Financeiro</h3>
+        <button class="modal-close-btn" onclick="closeAssistantModal()">✕</button>
+      </div>
+
+      <div class="assistant-chat-bubble" id="assistantDetailDiagnosis">
+        Analisando seus dados em tempo real com o Trocado...
+      </div>
+
+      <h4 style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">
+        Perguntas Rápidas ao Trocado:
+      </h4>
+
+      <div class="assistant-prompts">
+        <button class="prompt-chip" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.18) 0%, rgba(245, 158, 11, 0.18) 100%); border-color: rgba(239, 68, 68, 0.5); color: #fca5a5;" onclick="openMakeMoneyModal()">
+          🚀 <strong>COMO FAZER DINHEIRO:</strong> Aulas no YouTube & Renda Extra
+        </button>
+        <button class="prompt-chip" onclick="askAssistant('diagnostico')">
+          🔍 Como está minha saúde financeira este mês?
+        </button>
+        <button class="prompt-chip" onclick="askAssistant('regra')">
+          💡 Como funciona o Método da Reserva da 4ª Semana?
+        </button>
+        <button class="prompt-chip" onclick="askAssistant('limite')">
+          🎯 Quanto ainda posso gastar nesta semana?
+        </button>
+        <button class="prompt-chip" onclick="askAssistant('cortes')">
+          ✂️ Onde estou gastando mais e posso economizar?
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: COMO FAZER DINHEIRO (RENDA EXTRA & PLAYLIST YOUTUBE) -->
+  <div class="modal-backdrop" id="makeMoneyModal">
+    <div class="modal-card" style="max-width: 620px;">
+      <div class="modal-header">
+        <h3 class="modal-title">🚀 Como Fazer Dinheiro com o Trocado</h3>
+        <button class="modal-close-btn" onclick="closeMakeMoneyModal()">✕</button>
+      </div>
+
+      <!-- YouTube Playlist Hero Box -->
+      <div class="youtube-hero-box">
+        <div class="youtube-badge">📺 Playlist no YouTube</div>
+        <div class="youtube-title">Aulas de Opções no Mercado para Fazer um Extra</div>
+        <div class="youtube-desc">
+          Assista a aulas práticas selecionadas com métodos comprovados para faturar uma grana extra no seu tempo livre e acelerar sua reserva garantida.
+        </div>
+        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <a id="btnOpenYoutubePlaylist" href="#" target="_blank" class="youtube-cta-btn" onclick="openYoutubePlaylist(event)">
+            <span>▶️ Acessar Playlist no YouTube</span>
+          </a>
+          <button type="button" class="youtube-config-toggle" onclick="toggleEditPlaylistLink()">
+            ⚙️ Configurar / Trocar Link da Minha Playlist
+          </button>
+        </div>
+
+        <!-- Custom Playlist Link Editor -->
+        <div class="playlist-config-box" id="playlistConfigBox">
+          <label class="form-label" for="playlistUrlInput" style="color: #fff; font-size: 0.78rem;">
+            🔗 Cole o link da sua Playlist do YouTube:
+          </label>
+          <div style="display: flex; gap: 8px;">
+            <input type="url" id="playlistUrlInput" class="form-input" placeholder="https://www.youtube.com/playlist?list=..." style="flex: 1;">
+            <button type="button" class="btn-sheet" style="background: #ef4444; color: white;" onclick="saveYoutubePlaylist()">
+              Salvar
+            </button>
+          </div>
+          <small style="color: var(--text-subtle); font-size: 0.7rem; margin-top: 4px; display: block;">
+            Você pode colar o link de qualquer playlist do YouTube que você criar ou adicionar suas aulas favoritas!
+          </small>
+        </div>
+      </div>
+
+      <!-- Extra Income Growth Simulator -->
+      <div class="extra-simulator-card">
+        <div class="extra-sim-title">
+          <span>📈</span>
+          <span>O Poder do Extra no Bolso com o Método Pão Duro</span>
+        </div>
+        <div class="extra-sim-grid">
+          <div class="extra-sim-col">
+            <small>R$ 50 / semana</small>
+            <strong>+R$ 200/mês</strong>
+            <small style="color: var(--brand-primary-light);">+R$ 2.400 / ano</small>
+          </div>
+          <div class="extra-sim-col">
+            <small>R$ 100 / semana</small>
+            <strong>+R$ 400/mês</strong>
+            <small style="color: var(--brand-primary-light);">+R$ 4.800 / ano</small>
+          </div>
+          <div class="extra-sim-col">
+            <small>R$ 250 / semana</small>
+            <strong>+R$ 1.000/mês</strong>
+            <small style="color: var(--brand-primary-light);">+R$ 12.000 / ano</small>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px; text-transform: uppercase;">
+        💡 Principais Opções de Renda Extra no Mercado:
+      </h4>
+
+      <!-- Opportunities Grid -->
+      <div class="opportunities-grid">
+        <div class="opp-card">
+          <div class="opp-header">
+            <div class="opp-title">💻 Freelancer Digital</div>
+            <span class="opp-badge">Zero Investimento</span>
+          </div>
+          <div class="opp-desc">
+            Design de posts no Canva, edição de cortes para Reels/TikTok, digitação de documentos ou suporte ao cliente remoto.
+          </div>
+          <div class="opp-platforms">📍 99Freelas, Workana, VinteConto, Fiverr</div>
+        </div>
+
+        <div class="opp-card">
+          <div class="opp-header">
+            <div class="opp-title">📦 Desapego Turbo</div>
+            <span class="opp-badge">Pix Imediato</span>
+          </div>
+          <div class="opp-desc">
+            Venda roupas esquecidas, celulares antigos, livros e móveis que estão parados juntando poeira na sua casa.
+          </div>
+          <div class="opp-platforms">📍 OLX, Enjoei, Grupos de Bairro no WhatsApp</div>
+        </div>
+
+        <div class="opp-card">
+          <div class="opp-header">
+            <div class="opp-title">🍰 Gastronomia Rápida</div>
+            <span class="opp-badge">Alta Margem</span>
+          </div>
+          <div class="opp-desc">
+            Bolos de pote, brigadeiros gourmet, trufas ou marmitas fit para vender para colegas de trabalho e vizinhos.
+          </div>
+          <div class="opp-platforms">📍 Lucro médio: 50% a 100% por venda</div>
+        </div>
+
+        <div class="opp-card">
+          <div class="opp-header">
+            <div class="opp-title">🛍️ Afiliado de Achadinhos</div>
+            <span class="opp-badge">Sem Estoque</span>
+          </div>
+          <div class="opp-desc">
+            Divulgue links de produtos úteis e promoções em grupos de ofertas. Você ganha comissão a cada compra realizada.
+          </div>
+          <div class="opp-platforms">📍 Shopee Afiliados, Amazon Associados, Magalu</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 14px;">
+        <button type="button" class="btn-submit" style="margin-top: 0; background: var(--brand-primary); color: #0b0f19; font-weight: 800;" onclick="startAddExtraIncome()">
+          ➕ Faturou um Extra? Lançar Ganho Agora!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast"></div>
+
+  <!-- LOGIC & SCRIPTS -->
+  <script>
+    /* ========================================================
+       PÃO DURO FINANÇAS CORE DATA STORE & LOGIC
+       ======================================================== */
+    const STORAGE_KEY_PROFILE = 'paoduro_profile_v1';
+    const STORAGE_KEY_TRANSACTIONS = 'paoduro_txs_v1';
+    const STORAGE_KEY_THEME = 'paoduro_theme_v1';
+    const STORAGE_KEY_YOUTUBE = 'paoduro_youtube_playlist_v1';
+
+    // Fallbacks para migração transparente
+    const LEGACY_STORAGE_PROFILE = 'poupasmart_profile_v1';
+    const LEGACY_STORAGE_TRANSACTIONS = 'poupasmart_txs_v1';
+    const LEGACY_STORAGE_THEME = 'poupasmart_theme_v1';
+
+    /* ========================================================
+       AUTH & ACCESS CONTROL LOGIC (LOGIN, CADASTRO & SESSÃO)
+       ======================================================== */
+    const STORAGE_KEY_AUTH_USERS = 'paoduro_auth_users_v1';
+    const STORAGE_KEY_SESSION = 'paoduro_auth_session_v1';
+
+    const DEFAULT_AUTH_USER = {
+      username: 'admin',
+      email: 'usuario@paoduro.com',
+      password: 'paoduro123',
+      name: 'Você'
+    };
+
+    function getAuthUsers() {
+      const saved = localStorage.getItem(STORAGE_KEY_AUTH_USERS);
+      if (saved) {
+        try {
+          const list = JSON.parse(saved);
+          if (Array.isArray(list) && list.length > 0) return list;
+        } catch (e) {
+          console.error("Erro ao carregar usuários", e);
+        }
+      }
+      return [DEFAULT_AUTH_USER];
+    }
+
+    function saveAuthUsers(users) {
+      localStorage.setItem(STORAGE_KEY_AUTH_USERS, JSON.stringify(users));
+    }
+
+    function isUserAuthenticated() {
+      const sessionLocal = localStorage.getItem(STORAGE_KEY_SESSION);
+      const sessionTemp = sessionStorage.getItem(STORAGE_KEY_SESSION);
+      return Boolean(sessionLocal || sessionTemp);
+    }
+
+    function checkAuthOnStartup() {
+      const authOverlay = document.getElementById('authOverlay');
+      if (isUserAuthenticated()) {
+        authOverlay.classList.add('hidden');
+      } else {
+        authOverlay.classList.remove('hidden');
+        setTimeout(() => {
+          const userInp = document.getElementById('loginUser');
+          if (userInp) userInp.focus();
+        }, 300);
+      }
+    }
+
+    function switchAuthTab(tab) {
+      const btnLogin = document.getElementById('tabAuthLogin');
+      const btnReg = document.getElementById('tabAuthRegister');
+      const formLogin = document.getElementById('authLoginForm');
+      const formReg = document.getElementById('authRegisterForm');
+
+      if (tab === 'register') {
+        btnLogin.classList.remove('active');
+        btnReg.classList.add('active');
+        formLogin.style.display = 'none';
+        formReg.style.display = 'block';
+        document.getElementById('regName').focus();
+      } else {
+        btnReg.classList.remove('active');
+        btnLogin.classList.add('active');
+        formReg.style.display = 'none';
+        formLogin.style.display = 'block';
+        document.getElementById('loginUser').focus();
+      }
+    }
+
+    function togglePasswordVisibility(inputId, btnEl) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        btnEl.innerText = '🙈';
+      } else {
+        input.type = 'password';
+        btnEl.innerText = '👁️';
+      }
+    }
+
+    function fillDemoCredentials() {
+      document.getElementById('loginUser').value = 'admin';
+      document.getElementById('loginPassword').value = 'paoduro123';
+      showToast('Credenciais de demonstração preenchidas! 🪙');
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const userInput = document.getElementById('loginUser').value.trim();
+      const pwdInput = document.getElementById('loginPassword').value;
+      const remember = document.getElementById('loginRemember').checked;
+
+      const users = getAuthUsers();
+      const matched = users.find(u => 
+        (u.username.toLowerCase() === userInput.toLowerCase() || (u.email && u.email.toLowerCase() === userInput.toLowerCase())) &&
+        u.password === pwdInput
+      );
+
+      if (matched) {
+        if (remember) {
+          localStorage.setItem(STORAGE_KEY_SESSION, matched.username);
+        }
+        sessionStorage.setItem(STORAGE_KEY_SESSION, matched.username);
+
+        if (matched.name && (!profile.name || profile.name === 'Você')) {
+          profile.name = matched.name;
+          localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(profile));
+        }
+
+        document.getElementById('authOverlay').classList.add('hidden');
+        renderApp();
+        updateAssistantDiagnosis();
+        showToast(`Bem-vindo ao Pão Duro Finanças, ${escapeHtml(matched.name || matched.username)}! 🪙`);
+      } else {
+        showToast('❌ Usuário ou senha incorretos! Tente novamente.');
+      }
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const userInput = document.getElementById('regUser').value.trim();
+      const income = parseFloat(document.getElementById('regIncome').value) || 3500;
+      const pwd = document.getElementById('regPassword').value;
+      const pwdConfirm = document.getElementById('regConfirmPassword').value;
+
+      if (!name || !userInput || !pwd) {
+        showToast('Preencha todos os campos obrigatórios.');
+        return;
+      }
+
+      if (pwd !== pwdConfirm) {
+        showToast('❌ As senhas não conferem. Digite novamente.');
+        return;
+      }
+
+      if (pwd.length < 4) {
+        showToast('A senha deve ter pelo menos 4 caracteres.');
+        return;
+      }
+
+      const users = getAuthUsers();
+      const exists = users.some(u => u.username.toLowerCase() === userInput.toLowerCase());
+      if (exists) {
+        showToast('❌ Esse usuário já está cadastrado. Escolha outro nome.');
+        return;
+      }
+
+      const newUser = {
+        username: userInput,
+        name: name,
+        password: pwd,
+        income: income,
+        createdAt: new Date().toISOString()
+      };
+
+      users.push(newUser);
+      saveAuthUsers(users);
+
+      profile.name = name;
+      profile.income = income;
+      localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(profile));
+
+      localStorage.setItem(STORAGE_KEY_SESSION, newUser.username);
+      sessionStorage.setItem(STORAGE_KEY_SESSION, newUser.username);
+
+      document.getElementById('authOverlay').classList.add('hidden');
+      renderApp();
+      updateAssistantDiagnosis();
+      showToast(`Conta criada com sucesso! Cofre liberado, ${name}! 🎉`);
+    }
+
+    function logout() {
+      localStorage.removeItem(STORAGE_KEY_SESSION);
+      sessionStorage.removeItem(STORAGE_KEY_SESSION);
+      document.getElementById('authOverlay').classList.remove('hidden');
+      document.getElementById('loginPassword').value = '';
+      showToast('Cofre bloqueado com segurança. Até logo! 🔒');
+    }
+
+    function forgotPasswordPrompt() {
+      const user = prompt('Digite seu usuário ou email cadastrado para redefinir sua senha:');
+      if (!user) return;
+      const users = getAuthUsers();
+      const found = users.find(u => u.username.toLowerCase() === user.trim().toLowerCase() || (u.email && u.email.toLowerCase() === user.trim().toLowerCase()));
+      if (found) {
+        const newPwd = prompt(`Usuário "${found.username}" encontrado!\nDigite sua nova senha de acesso:`);
+        if (newPwd && newPwd.length >= 4) {
+          found.password = newPwd;
+          saveAuthUsers(users);
+          showToast('Senha redefinida com sucesso! Você já pode entrar.');
+          document.getElementById('loginUser').value = found.username;
+          document.getElementById('loginPassword').value = newPwd;
+        } else if (newPwd) {
+          alert('A nova senha deve ter pelo menos 4 caracteres.');
+        }
+      } else {
+        alert('Usuário não localizado no dispositivo. Você pode criar uma nova conta na aba "Criar Nova Conta"!');
+      }
+    }
+
+    function toggleChangePasswordBox() {
+      const box = document.getElementById('changePasswordBox');
+      if (!box) return;
+      box.style.display = box.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    // Default Profile
+    let profile = {
+      name: 'Você',
+      income: 3500,
+      reservePercent: 20,
+      fixedExpenses: 1100
+    };
+
+    // Current State
+    let transactions = [];
+    let currentFilter = 'all';
+    let currentMonthYear = ''; // Format YYYY-MM
+    let activeTxType = 'gasto';
+
+    // Categories mapping
+    const CATEGORIES = {
+      gasto: ['Alimentação', 'Moradia', 'Transporte', 'Saúde', 'Lazer', 'Educação', 'Compras', 'Outros'],
+      ganho: ['Salário', 'Freelance', 'Rendimentos', 'Venda', 'Presente', 'Outros'],
+      investimento: ['Reserva de Emergência', 'Tesouro Direto', 'CDB / Renda Fixa', 'Ações / FIIs', 'Cripto', 'Previdência']
+    };
+
+    const CATEGORY_ICONS = {
+      'Alimentação': '🍔',
+      'Moradia': '🏠',
+      'Transporte': '🚗',
+      'Saúde': '💊',
+      'Lazer': '🎉',
+      'Educação': '📚',
+      'Compras': '🛍️',
+      'Salário': '💼',
+      'Freelance': '💻',
+      'Rendimentos': '📈',
+      'Venda': '🏷️',
+      'Presente': '🎁',
+      'Reserva de Emergência': '🛡️',
+      'Tesouro Direto': '🏛️',
+      'CDB / Renda Fixa': '📄',
+      'Ações / FIIs': '📊',
+      'Cripto': '🪙',
+      'Previdência': '🌱',
+      'Outros': '📦'
+    };
+
+    const CATEGORY_COLORS = [
+      '#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4', '#f43f5e', '#64748b'
+    ];
+
+    // Initialize App
+    window.addEventListener('DOMContentLoaded', () => {
+      loadTheme();
+      checkAuthOnStartup();
+      loadProfile();
+      initMonthPicker();
+      loadTransactions();
+      
+      // If first run ever, seed with friendly initial example so it's not empty
+      if (transactions.length === 0 && !localStorage.getItem('paoduro_seeded') && !localStorage.getItem('poupasmart_seeded')) {
+        seedInitialDemoData();
+      }
+
+      renderApp();
+      updateAssistantDiagnosis();
+
+      // Hook reserve calculation live preview in profile form
+      const incomeInput = document.getElementById('userIncome');
+      const percentSelect = document.getElementById('reservePercent');
+      const updatePreview = () => {
+        const inc = parseFloat(incomeInput.value) || 0;
+        const pct = parseFloat(percentSelect.value) || 20;
+        const res = (inc * pct) / 100;
+        document.getElementById('reserveEstimateCalculated').innerText = 
+          `Estimativa: ${formatBRL(res)} guardados no cofre da última semana.`;
+      };
+      incomeInput.addEventListener('input', updatePreview);
+      percentSelect.addEventListener('change', updatePreview);
+    });
+
+    /* ========================================================
+       MONTH SELECTION & DATES
+       ======================================================== */
+    function initMonthPicker() {
+      const select = document.getElementById('monthSelect');
+      select.innerHTML = '';
+      
+      const now = new Date();
+      // Generate current month, 3 months in past, and 2 months ahead
+      const months = [];
+      for (let i = -3; i <= 2; i++) {
+        const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const key = `${y}-${m}`;
+        const label = d.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+        // Capitalize month
+        const cleanLabel = label.charAt(0).toUpperCase() + label.slice(1);
+        months.push({ key, cleanLabel });
+      }
+
+      const currentKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+      currentMonthYear = currentKey;
+
+      months.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m.key;
+        opt.textContent = m.cleanLabel;
+        if (m.key === currentKey) opt.selected = true;
+        select.appendChild(opt);
+      });
+
+      // Update date picker default to today
+      const todayIso = now.toISOString().split('T')[0];
+      document.getElementById('txDate').value = todayIso;
+
+      // Update badge
+      const day = now.getDate();
+      document.getElementById('currentDayBadge').innerText = `Hoje: Dia ${day}`;
+    }
+
+    function changeMonth(newMonthKey) {
+      currentMonthYear = newMonthKey;
+      renderApp();
+      updateAssistantDiagnosis();
+      showToast(`Exibindo dados de ${document.getElementById('monthSelect').selectedOptions[0].text}`);
+    }
+
+    /* ========================================================
+       LOCAL STORAGE LOAD & SAVE
+       ======================================================== */
+    function loadProfile() {
+      let saved = localStorage.getItem(STORAGE_KEY_PROFILE);
+      if (!saved) {
+        saved = localStorage.getItem(LEGACY_STORAGE_PROFILE);
+      }
+      if (saved) {
+        try {
+          profile = JSON.parse(saved);
+        } catch (e) {
+          console.error("Erro ao carregar perfil", e);
+        }
+      }
+      // Populate profile modal inputs
+      document.getElementById('userName').value = profile.name || 'Você';
+      document.getElementById('userIncome').value = profile.income || 3500;
+      document.getElementById('reservePercent').value = profile.reservePercent || 20;
+      document.getElementById('fixedExpenses').value = profile.fixedExpenses || 1100;
+    }
+
+    function saveProfile(event) {
+      event.preventDefault();
+      profile.name = document.getElementById('userName').value.trim() || 'Você';
+      profile.income = parseFloat(document.getElementById('userIncome').value) || 0;
+      profile.reservePercent = parseFloat(document.getElementById('reservePercent').value) || 20;
+      profile.fixedExpenses = parseFloat(document.getElementById('fixedExpenses').value) || 0;
+
+      // Check if user requested password change
+      const newPwd = document.getElementById('profileNewPassword').value;
+      const confirmNewPwd = document.getElementById('profileConfirmNewPassword').value;
+      if (newPwd) {
+        if (newPwd.length < 4) {
+          showToast('A nova senha deve ter pelo menos 4 caracteres.');
+          return;
+        }
+        if (newPwd !== confirmNewPwd) {
+          showToast('As novas senhas digitadas não conferem.');
+          return;
+        }
+        const activeUser = localStorage.getItem(STORAGE_KEY_SESSION) || sessionStorage.getItem(STORAGE_KEY_SESSION) || 'admin';
+        const users = getAuthUsers();
+        const userObj = users.find(u => u.username.toLowerCase() === activeUser.toLowerCase());
+        if (userObj) {
+          userObj.password = newPwd;
+          saveAuthUsers(users);
+        }
+        document.getElementById('profileNewPassword').value = '';
+        document.getElementById('profileConfirmNewPassword').value = '';
+        const box = document.getElementById('changePasswordBox');
+        if (box) box.style.display = 'none';
+        showToast('Senha do cofre atualizada com sucesso! 🔐');
+      }
+
+      localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(profile));
+      closeProfileModal();
+      renderApp();
+      updateAssistantDiagnosis();
+      showToast('Configurações do Pão Duro salvas com sucesso! 🎉');
+    }
+
+    function loadTransactions() {
+      let saved = localStorage.getItem(STORAGE_KEY_TRANSACTIONS);
+      if (!saved) {
+        saved = localStorage.getItem(LEGACY_STORAGE_TRANSACTIONS);
+      }
+      if (saved) {
+        try {
+          transactions = JSON.parse(saved);
+        } catch (e) {
+          console.error("Erro ao carregar transações", e);
+          transactions = [];
+        }
+      }
+    }
+
+    function saveTransactionsToStorage() {
+      localStorage.setItem(STORAGE_KEY_TRANSACTIONS, JSON.stringify(transactions));
+    }
+
+    function seedInitialDemoData() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      
+      const demoData = [
+        {
+          id: 'demo-1',
+          type: 'ganho',
+          amount: profile.income || 3500,
+          desc: 'Salário Mensal',
+          category: 'Salário',
+          date: `${y}-${m}-01`,
+          method: 'Transferência'
+        },
+        {
+          id: 'demo-2',
+          type: 'gasto',
+          amount: profile.fixedExpenses || 1100,
+          desc: 'Aluguel + Condomínio',
+          category: 'Moradia',
+          date: `${y}-${m}-02`,
+          method: 'Pix'
+        },
+        {
+          id: 'demo-3',
+          type: 'gasto',
+          amount: 215.50,
+          desc: 'Supermercado Semanal',
+          category: 'Alimentação',
+          date: `${y}-${m}-04`,
+          method: 'Cartão de Crédito'
+        },
+        {
+          id: 'demo-4',
+          type: 'investimento',
+          amount: 350.00,
+          desc: 'Aporte Tesouro Selic (Reserva)',
+          category: 'Tesouro Direto',
+          date: `${y}-${m}-05`,
+          method: 'Pix'
+        },
+        {
+          id: 'demo-5',
+          type: 'ganho',
+          amount: 180.00,
+          desc: 'Venda Rápida de Desapegos (Renda Extra)',
+          category: 'Venda',
+          date: `${y}-${m}-07`,
+          method: 'Pix'
+        },
+        {
+          id: 'demo-6',
+          type: 'gasto',
+          amount: 65.00,
+          desc: 'Combustível / Uber',
+          category: 'Transporte',
+          date: `${y}-${m}-10`,
+          method: 'Cartão de Débito'
+        }
+      ];
+
+      transactions = demoData;
+      saveTransactionsToStorage();
+      localStorage.setItem('paoduro_seeded', 'true');
+    }
+
+    /* ========================================================
+       FINANCIAL CALCULATIONS & THE 4-WEEK GOLDEN RULE
+       ======================================================== */
+    function getMonthTransactions() {
+      return transactions.filter(t => t.date.startsWith(currentMonthYear));
+    }
+
+    function getTransactionWeek(dateString) {
+      const day = parseInt(dateString.split('-')[2], 10);
+      if (day <= 7) return 1;
+      if (day <= 14) return 2;
+      if (day <= 21) return 3;
+      return 4; // Day 22 to month end (Golden Reserve Week)
+    }
+
+    function calculateMetrics() {
+      const currentTxs = getMonthTransactions();
+
+      let totalGains = 0;
+      let totalExpenses = 0;
+      let totalInvestments = 0;
+
+      const weekExpenses = { 1: 0, 2: 0, 3: 0, 4: 0 };
+      const categoryExpenses = {};
+
+      currentTxs.forEach(t => {
+        const val = parseFloat(t.amount);
+        if (t.type === 'ganho') {
+          totalGains += val;
+        } else if (t.type === 'gasto') {
+          totalExpenses += val;
+          const week = getTransactionWeek(t.date);
+          weekExpenses[week] = (weekExpenses[week] || 0) + val;
+          categoryExpenses[t.category] = (categoryExpenses[t.category] || 0) + val;
+        } else if (t.type === 'investimento') {
+          totalInvestments += val;
+        }
+      });
+
+      const totalBalance = totalGains - totalExpenses - totalInvestments;
+
+      // Base income for calculation (either actual gains logged or estimated profile income)
+      const baseIncome = totalGains > 0 ? totalGains : (profile.income || 3000);
+      
+      // Targeted 4th Week Reserve (e.g. 20% of base income)
+      const targetReserve = (baseIncome * (profile.reservePercent || 20)) / 100;
+
+      // Budget available for variable spending = Base Income - Target Reserve - Fixed Expenses
+      const fixedExp = profile.fixedExpenses || 0;
+      const budgetForVariable = Math.max(0, baseIncome - targetReserve - fixedExp);
+
+      // The Weekly Ceiling for Weeks 1, 2, and 3:
+      // (Divided across the first 3 weeks so week 4 is protected!)
+      const weeklyCeiling = budgetForVariable / 3;
+
+      // Actual Reserve Protected = Base Income - Total Expenses - Total Investments
+      // If expenses in W1..W3 are respected, reserve is intact!
+      const currentProtectedReserve = Math.max(0, baseIncome - totalExpenses);
+
+      return {
+        totalGains,
+        totalExpenses,
+        totalInvestments,
+        totalBalance,
+        baseIncome,
+        targetReserve,
+        weeklyCeiling,
+        weekExpenses,
+        categoryExpenses,
+        currentProtectedReserve
+      };
+    }
+
+    /* ========================================================
+       RENDER ENGINE: DASHBOARD, WEEKS, LISTS, CHARTS
+       ======================================================== */
+    function renderApp() {
+      const metrics = calculateMetrics();
+
+      // Top Stats
+      document.getElementById('totalBalance').innerText = formatBRL(metrics.totalBalance);
+      document.getElementById('totalGains').innerText = formatBRL(metrics.totalGains);
+      document.getElementById('totalExpenses').innerText = formatBRL(metrics.totalExpenses);
+      document.getElementById('reserveProtectedVal').innerText = formatBRL(metrics.currentProtectedReserve);
+
+      document.getElementById('incomeSubtext').innerText = `Renda base: ${formatBRL(metrics.baseIncome)}`;
+      document.getElementById('reserveTargetText').innerText = `Meta: ${formatBRL(metrics.targetReserve)} garantidos (${profile.reservePercent}%)`;
+      document.getElementById('ruleReserveBadge').innerText = `Meta: ${profile.reservePercent}% da renda guardada`;
+
+      const expPct = metrics.baseIncome > 0 ? Math.round((metrics.totalExpenses / metrics.baseIncome) * 100) : 0;
+      document.getElementById('expensePacingSubtext').innerText = `${expPct}% da renda comprometida`;
+
+      // 4 Weeks Timeline Rendering
+      renderWeeks(metrics);
+
+      // Render Transaction List (App View)
+      renderTransactionsList();
+
+      // Render Sheet View (Table)
+      renderSheetTable();
+
+      // Render Charts
+      renderCharts(metrics);
+
+      // Render Hover Popovers with Intuitive Charts
+      renderBalancePopover(metrics);
+      renderGainsPopover(metrics);
+      renderExpensesPopover(metrics);
+      renderReservePopover(metrics);
+    }
+
+    function renderWeeks(metrics) {
+      const now = new Date();
+      const currentDay = now.getDate();
+      const currentMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+      const isCurrentMonth = (currentMonthYear === currentMonthKey);
+
+      let activeWeekNumber = 1;
+      if (isCurrentMonth) {
+        if (currentDay <= 7) activeWeekNumber = 1;
+        else if (currentDay <= 14) activeWeekNumber = 2;
+        else if (currentDay <= 21) activeWeekNumber = 3;
+        else activeWeekNumber = 4;
+      }
+
+      // Ceiling includes fixed expenses distributed or pure variable?
+      // For clarity: Variable weekly ceiling
+      const ceiling = metrics.weeklyCeiling;
+
+      // Update Week 1, 2, 3
+      [1, 2, 3].forEach(w => {
+        const spent = metrics.weekExpenses[w] || 0;
+        const box = document.getElementById(`weekBox${w}`);
+        const spentEl = document.getElementById(`w${w}Spent`);
+        const ceilEl = document.getElementById(`w${w}Ceiling`);
+        const bar = document.getElementById(`w${w}Bar`);
+        const status = document.getElementById(`w${w}Status`);
+
+        spentEl.innerText = formatBRL(spent);
+        ceilEl.innerText = `Teto livre: ${formatBRL(ceiling)}`;
+
+        const pct = ceiling > 0 ? Math.min(100, Math.round((spent / ceiling) * 100)) : 0;
+        bar.style.width = `${pct}%`;
+
+        // Bar colors
+        bar.className = 'progress-fill ' + (pct <= 75 ? 'progress-safe' : (pct <= 100 ? 'progress-warn' : 'progress-danger'));
+
+        // Current week highlight
+        if (isCurrentMonth && activeWeekNumber === w) {
+          box.classList.add('current-week');
+          status.innerText = `🟢 Semana Atual (${pct}%)`;
+          status.style.background = 'var(--brand-primary-glow)';
+          status.style.color = 'var(--brand-primary-light)';
+        } else {
+          box.classList.remove('current-week');
+          if (isCurrentMonth && w < activeWeekNumber) {
+            status.innerText = spent <= ceiling ? '✅ Dentro da meta' : '⚠️ Acima do teto';
+            status.style.background = spent <= ceiling ? 'rgba(16, 185, 129, 0.15)' : 'rgba(244, 63, 94, 0.15)';
+            status.style.color = spent <= ceiling ? 'var(--color-gain)' : 'var(--color-expense)';
+          } else {
+            status.innerText = 'Aguardando';
+            status.style.background = 'var(--bg-card)';
+            status.style.color = 'var(--text-subtle)';
+          }
+        }
+      });
+
+      // Week 4 (The Reserve Week)
+      const w4Box = document.getElementById('weekBox4');
+      const w4Saved = document.getElementById('w4Saved');
+      const w4Ceiling = document.getElementById('w4Ceiling');
+      const w4Status = document.getElementById('w4Status');
+
+      w4Saved.innerText = formatBRL(metrics.currentProtectedReserve);
+      w4Ceiling.innerText = `Meta de Ouro: ${formatBRL(metrics.targetReserve)}`;
+
+      if (isCurrentMonth && activeWeekNumber === 4) {
+        w4Box.classList.add('current-week');
+        w4Status.innerText = '🏆 Semana de Ouro Ativa!';
+      } else {
+        w4Box.classList.remove('current-week');
+        if (metrics.currentProtectedReserve >= metrics.targetReserve) {
+          w4Status.innerText = '🛡️ Cofre Protegido!';
+        } else {
+          w4Status.innerText = '⚠️ Atenção aos gastos';
+        }
+      }
+    }
+
+    function renderTransactionsList() {
+      const container = document.getElementById('transactionList');
+      container.innerHTML = '';
+
+      let list = getMonthTransactions();
+
+      // Apply Filters
+      if (currentFilter === 'gasto' || currentFilter === 'ganho' || currentFilter === 'investimento') {
+        list = list.filter(t => t.type === currentFilter);
+      } else if (currentFilter.startsWith('w')) {
+        const weekNum = parseInt(currentFilter.replace('w', ''), 10);
+        list = list.filter(t => getTransactionWeek(t.date) === weekNum);
+      }
+
+      // Sort newest first
+      list.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">🍃</div>
+            <p style="font-weight: 600;">Nenhum lançamento encontrado</p>
+            <p style="font-size: 0.8rem; color: var(--text-subtle);">Clique no botão '+' para adicionar seu primeiro gasto ou ganho!</p>
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach(tx => {
+        const item = document.createElement('div');
+        item.className = 'tx-item';
+
+        const icon = CATEGORY_ICONS[tx.category] || '💸';
+        let typeBadgeClass = 'expense';
+        let prefix = '- ';
+        let badgeBg = 'var(--color-expense-bg)';
+
+        if (tx.type === 'ganho') {
+          typeBadgeClass = 'gain';
+          prefix = '+ ';
+          badgeBg = 'var(--color-gain-bg)';
+        } else if (tx.type === 'investimento') {
+          typeBadgeClass = 'invest';
+          prefix = '↗ ';
+          badgeBg = 'var(--color-invest-bg)';
+        }
+
+        const dateParts = tx.date.split('-');
+        const dateFormatted = `${dateParts[2]}/${dateParts[1]}`;
+        const weekNum = getTransactionWeek(tx.date);
+
+        item.innerHTML = `
+          <div class="tx-left">
+            <div class="tx-icon-badge" style="background: ${badgeBg};">
+              ${icon}
+            </div>
+            <div class="tx-info">
+              <span class="tx-desc">${escapeHtml(tx.desc)}</span>
+              <div class="tx-meta">
+                <span>${dateFormatted}</span>
+                <span>•</span>
+                <span>${escapeHtml(tx.category)}</span>
+                <span>•</span>
+                <span>Semana ${weekNum}</span>
+                ${tx.method ? `<span>•</span><span>${escapeHtml(tx.method)}</span>` : ''}
+              </div>
+            </div>
+          </div>
+          <div class="tx-right">
+            <span class="tx-amount ${typeBadgeClass}">${prefix}${formatBRL(tx.amount)}</span>
+            <button class="btn-delete-tx" onclick="deleteTransaction('${tx.id}')" title="Excluir" aria-label="Excluir">
+              🗑️
+            </button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function renderSheetTable() {
+      const tbody = document.getElementById('sheetTableBody');
+      tbody.innerHTML = '';
+
+      const list = getMonthTransactions();
+      list.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      if (list.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align: center; padding: 24px; color: var(--text-muted);">
+              Nenhum dado na planilha neste mês.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      list.forEach(tx => {
+        const tr = document.createElement('tr');
+        const weekNum = getTransactionWeek(tx.date);
+        
+        let typeColor = '#f43f5e';
+        let typeBg = 'rgba(244, 63, 94, 0.15)';
+        let typeName = 'Gasto';
+        let prefix = '-';
+
+        if (tx.type === 'ganho') {
+          typeColor = '#10b981';
+          typeBg = 'rgba(16, 185, 129, 0.15)';
+          typeName = 'Ganho';
+          prefix = '+';
+        } else if (tx.type === 'investimento') {
+          typeColor = '#8b5cf6';
+          typeBg = 'rgba(139, 92, 246, 0.15)';
+          typeName = 'Investimento';
+          prefix = '↗';
+        }
+
+        const dateParts = tx.date.split('-');
+        const dateFormatted = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+
+        tr.innerHTML = `
+          <td>${dateFormatted}</td>
+          <td>
+            <span class="tag-badge" style="background: ${typeBg}; color: ${typeColor};">
+              ${typeName}
+            </span>
+          </td>
+          <td style="font-weight: 600;">${escapeHtml(tx.desc)}</td>
+          <td>${CATEGORY_ICONS[tx.category] || ''} ${escapeHtml(tx.category)}</td>
+          <td>Semana ${weekNum}</td>
+          <td>${escapeHtml(tx.method || 'Outro')}</td>
+          <td style="font-weight: 700; color: ${typeColor};">${prefix} ${formatBRL(tx.amount)}</td>
+          <td>
+            <button class="btn-delete-tx" onclick="deleteTransaction('${tx.id}')" title="Excluir">
+              🗑️
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderCharts(metrics) {
+      // Donut Chart for Categories
+      const svg = document.getElementById('donutSvg');
+      svg.innerHTML = '';
+      const totalExp = metrics.totalExpenses;
+      document.getElementById('donutTotalText').innerText = formatBRL(totalExp);
+
+      const catBars = document.getElementById('categoryBarsContainer');
+      catBars.innerHTML = '';
+
+      const categories = Object.keys(metrics.categoryExpenses);
+
+      if (totalExp === 0 || categories.length === 0) {
+        // Draw empty gray circle
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', '50');
+        circle.setAttribute('cy', '50');
+        circle.setAttribute('r', '40');
+        circle.setAttribute('fill', 'none');
+        circle.setAttribute('stroke', '#334155');
+        circle.setAttribute('stroke-width', '12');
+        svg.appendChild(circle);
+
+        catBars.innerHTML = `<small style="color: var(--text-muted); text-align: center;">Sem despesas no mês para categorizar.</small>`;
+        return;
+      }
+
+      // Sort categories largest first
+      categories.sort((a, b) => metrics.categoryExpenses[b] - metrics.categoryExpenses[a]);
+
+      const circumference = 2 * Math.PI * 40; // ~251.32
+      let accumulatedOffset = 0;
+
+      categories.forEach((cat, idx) => {
+        const val = metrics.categoryExpenses[cat];
+        const ratio = val / totalExp;
+        const dash = ratio * circumference;
+        const color = CATEGORY_COLORS[idx % CATEGORY_COLORS.length];
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', '50');
+        circle.setAttribute('cy', '50');
+        circle.setAttribute('r', '40');
+        circle.setAttribute('fill', 'none');
+        circle.setAttribute('stroke', color);
+        circle.setAttribute('stroke-width', '12');
+        circle.setAttribute('stroke-dasharray', `${dash} ${circumference - dash}`);
+        circle.setAttribute('stroke-dashoffset', -accumulatedOffset);
+        circle.setAttribute('transform', 'rotate(-90 50 50)');
+        circle.setAttribute('stroke-linecap', 'round');
+        svg.appendChild(circle);
+
+        accumulatedOffset += dash;
+
+        // Add percentage progress bar item
+        const pct = Math.round(ratio * 100);
+        const barItem = document.createElement('div');
+        barItem.className = 'category-bar-item';
+        barItem.innerHTML = `
+          <div class="category-bar-info">
+            <span>${CATEGORY_ICONS[cat] || '📦'} ${escapeHtml(cat)}</span>
+            <span style="font-weight: 700;">${formatBRL(val)} (${pct}%)</span>
+          </div>
+          <div class="progress-bar-container" style="height: 5px;">
+            <div class="progress-fill" style="width: ${pct}%; background: ${color};"></div>
+          </div>
+        `;
+        catBars.appendChild(barItem);
+      });
+    }
+
+    /* ========================================================
+       ASSISTANT LOGIC (TROCADO: PROATIVO & INTERATIVO)
+       ======================================================== */
+    function updateAssistantDiagnosis() {
+      const metrics = calculateMetrics();
+      const now = new Date();
+      const currentDay = now.getDate();
+      const currentMonthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+      const isCurrentMonth = (currentMonthYear === currentMonthKey);
+
+      let weekNum = 1;
+      if (isCurrentMonth) {
+        if (currentDay <= 7) weekNum = 1;
+        else if (currentDay <= 14) weekNum = 2;
+        else if (currentDay <= 21) weekNum = 3;
+        else weekNum = 4;
+      }
+
+      const spentThisWeek = metrics.weekExpenses[weekNum] || 0;
+      const ceiling = metrics.weeklyCeiling;
+      const banner = document.getElementById('assistantMessage');
+
+      if (!isCurrentMonth) {
+        banner.innerHTML = `🪙 <strong>Trocado avisa:</strong> Você está visualizando o histórico de <strong>${document.getElementById('monthSelect').selectedOptions[0].text}</strong>. Naquele mês você fechou com saldo de <strong>${formatBRL(metrics.totalBalance)}</strong>.`;
+        return;
+      }
+
+      if (weekNum <= 3) {
+        const remainingThisWeek = ceiling - spentThisWeek;
+        if (remainingThisWeek >= 0) {
+          banner.innerHTML = `🪙 E aí, <strong>${escapeHtml(profile.name)}</strong>! Aqui é o <strong>Trocado</strong>. Você está na <strong>Semana ${weekNum}</strong>. Ainda restam <strong>${formatBRL(remainingThisWeek)}</strong> do seu teto livre semanal. Mantenha a disciplina para chegar na 4ª semana com a sua <strong>Reserva de ${formatBRL(metrics.targetReserve)}</strong> 100% blindada no bolso! 🥖🛡️`;
+        } else {
+          const excess = Math.abs(remainingThisWeek);
+          banner.innerHTML = `⚠️ Opa, <strong>${escapeHtml(profile.name)}</strong>! O Trocado viu que você ultrapassou o teto da Semana ${weekNum} em <strong>${formatBRL(excess)}</strong>. Segure os gastos supérfluos nos próximos dias para não comprometer o cofre da 4ª Semana!`;
+        }
+      } else {
+        // We are in Week 4!
+        if (metrics.currentProtectedReserve >= metrics.targetReserve) {
+          banner.innerHTML = `🎉 <strong>Sensacional, ${escapeHtml(profile.name)}!</strong> O Trocado tá orgulhoso: você chegou na 4ª Semana e garantiu <strong>${formatBRL(metrics.currentProtectedReserve)}</strong> de reserva intacta no bolso! O método Pão Duro funcionou com perfeição! 🏆💰`;
+        } else {
+          banner.innerHTML = `🪙 Você está na 4ª Semana! Sua reserva protegida é de <strong>${formatBRL(metrics.currentProtectedReserve)}</strong>. Continue na defensiva até a virada do mês que o bolso agradece!`;
+        }
+      }
+    }
+
+    function askAssistant(topic) {
+      const metrics = calculateMetrics();
+      const bubble = document.getElementById('assistantDetailDiagnosis');
+
+      if (topic === 'renda_extra') {
+        openMakeMoneyModal();
+        return;
+      }
+
+      if (topic === 'diagnostico') {
+        const savingsRate = metrics.baseIncome > 0 ? Math.round((metrics.currentProtectedReserve / metrics.baseIncome) * 100) : 0;
+        bubble.innerHTML = `
+          <strong>📊 Raio-X do Trocado para o seu Mês:</strong><br><br>
+          • <strong>Receita Base:</strong> ${formatBRL(metrics.baseIncome)}<br>
+          • <strong>Gastos Realizados:</strong> ${formatBRL(metrics.totalExpenses)} (${100 - savingsRate}% da renda)<br>
+          • <strong>Investimentos cadastrados:</strong> ${formatBRL(metrics.totalInvestments)}<br>
+          • <strong>Reserva Preservada:</strong> ${formatBRL(metrics.currentProtectedReserve)} (${savingsRate}% guardados)<br><br>
+          <em>Status do Trocado: ${savingsRate >= profile.reservePercent ? '🟢 Excelente! Você está honrando o espírito Pão Duro e batendo a meta de reserva.' : '🟡 Atenção: Gastos acima da meta planejada para o período. Respire fundo e segure o cartão!'}</em>
+        `;
+      } else if (topic === 'regra') {
+        bubble.innerHTML = `
+          <strong>🛡️ Método Pão Duro da 4ª Semana (Reserva Blindada):</strong><br><br>
+          A maioria das pessoas chega no fim do mês no vermelho porque gasta sem limites nas primeiras semanas. Nosso método resolve isso de forma simples e infalível:<br><br>
+          1. <strong>Blindamos primeiro a sua reserva de ${profile.reservePercent}%</strong> (${formatBRL(metrics.targetReserve)}) direto no cofre mental.<br>
+          2. Descontamos seus compromissos fixos (${formatBRL(profile.fixedExpenses || 0)}).<br>
+          3. O dinheiro restante vira seu <strong>teto semanal livre</strong> para as <strong>Semanas 1, 2 e 3</strong> (${formatBRL(metrics.weeklyCeiling)}/semana).<br>
+          4. Na <strong>4ª Semana (dia 22 ao fim do mês)</strong> sua reserva está 100% intacta no seu bolso, sem precisar de cartões nem empréstimos! 🏆
+        `;
+      } else if (topic === 'limite') {
+        const now = new Date();
+        const day = now.getDate();
+        let week = 1;
+        if (day <= 7) week = 1;
+        else if (day <= 14) week = 2;
+        else if (day <= 21) week = 3;
+        else week = 4;
+
+        const spent = metrics.weekExpenses[week] || 0;
+        const ceiling = metrics.weeklyCeiling;
+        const left = ceiling - spent;
+
+        bubble.innerHTML = `
+          <strong>🎯 Limite da Sua Semana Atual (Semana ${week}):</strong><br><br>
+          • <strong>Teto Semanal Recomendado:</strong> ${formatBRL(ceiling)}<br>
+          • <strong>Você já gastou:</strong> ${formatBRL(spent)}<br>
+          • <strong>Saldo disponível para esta semana:</strong> <strong style="color: ${left >= 0 ? '#10b981' : '#f43f5e'};">${formatBRL(left)}</strong><br><br>
+          ${left >= 0 ? '👍 Parabéns! Você está dentro da linha. Se continuar nesse ritmo, a 4ª semana vai ter dinheiro sobrando!' : '⚠️ Atenção: Você já estourou o limite da semana. Evite novos gastos variáveis até segunda-feira para proteger sua reserva!'}
+        `;
+      } else if (topic === 'cortes') {
+        const categories = Object.keys(metrics.categoryExpenses);
+        if (categories.length === 0) {
+          bubble.innerHTML = `O Trocado precisa que você lance alguns gastos para identificar por onde seu dinheiro está escapando. Adicione suas despesas para ver as dicas de corte!`;
+          return;
+        }
+        categories.sort((a, b) => metrics.categoryExpenses[b] - metrics.categoryExpenses[a]);
+        const topCat = categories[0];
+        const topAmount = metrics.categoryExpenses[topCat];
+
+        bubble.innerHTML = `
+          <strong>✂️ Onde Cortar Gastos (Conselho do Trocado):</strong><br><br>
+          Sua maior despesa no momento está na categoria <strong>${escapeHtml(topCat)}</strong> (${formatBRL(topAmount)}).<br><br>
+          <strong>Dica de Ouro do Pão Duro:</strong> Se você cortar pequenas compras supérfluas nessa categoria e economizar apenas 15%, você libera <strong>${formatBRL(topAmount * 0.15)}</strong> direto pro seu bolso na 4ª semana!
+        `;
+      }
+    }
+
+    /* ========================================================
+       POPOVER CHARTS RENDERING: AS 4 PRINCIPAIS VERTENTES
+       ======================================================== */
+    let activePopoverCard = null;
+
+    function showStatPopover(cardType) {
+      const card = document.getElementById(`card${capitalize(cardType)}`);
+      if (card) card.classList.add('active-popover');
+    }
+
+    function hideStatPopover(cardType) {
+      if (activePopoverCard !== cardType) {
+        const card = document.getElementById(`card${capitalize(cardType)}`);
+        if (card) card.classList.remove('active-popover');
+      }
+    }
+
+    function toggleStatPopover(cardType) {
+      const card = document.getElementById(`card${capitalize(cardType)}`);
+      if (!card) return;
+      if (activePopoverCard === cardType) {
+        card.classList.remove('active-popover');
+        activePopoverCard = null;
+      } else {
+        ['balance', 'gains', 'expenses', 'reserve'].forEach(c => {
+          const other = document.getElementById(`card${capitalize(c)}`);
+          if (other) other.classList.remove('active-popover');
+        });
+        card.classList.add('active-popover');
+        activePopoverCard = cardType;
+      }
+    }
+
+    function capitalize(s) {
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+
+    // 1. Onde o saldo foi idealizado
+    function renderBalancePopover(metrics) {
+      const container = document.getElementById('popoverBalanceContent');
+      if (!container) return;
+
+      const baseIncome = metrics.baseIncome;
+      const fixedExp = profile.fixedExpenses || 0;
+      const varExp = Math.max(0, metrics.totalExpenses);
+      const investments = metrics.totalInvestments;
+      const totalBalance = metrics.totalBalance;
+
+      const totalDenominator = Math.max(baseIncome, fixedExp + varExp + investments, 1);
+      const fixedPct = Math.min(100, Math.round((fixedExp / totalDenominator) * 100));
+      const varPct = Math.min(100, Math.round((varExp / totalDenominator) * 100));
+      const invPct = Math.min(100, Math.round((investments / totalDenominator) * 100));
+      const balPct = totalBalance > 0 ? Math.min(100, Math.round((totalBalance / totalDenominator) * 100)) : 0;
+
+      let statusBadge = 'Saudável 🟢';
+      let statusClass = 'gain';
+      let trocadoTip = 'Seu saldo idealizado está positivo! Quem gasta menos do que ganha chega na 4ª semana no mais absoluto conforto.';
+
+      if (totalBalance < 0) {
+        statusBadge = 'No Vermelho 🔴';
+        statusClass = 'expense';
+        trocadoTip = 'Atenção do Trocado: Suas saídas superaram suas receitas. Dê uma segurada nas compras variáveis antes do dia 21 para equilibrar o caixa!';
+      } else if (totalBalance < metrics.targetReserve) {
+        statusBadge = 'Atenção 🟡';
+        statusClass = 'gold';
+        trocadoTip = 'Seu saldo está positivo, mas ainda abaixo da meta ideal de reserva. Segure as despesas supérfluas para blindar seu cofre!';
+      }
+
+      container.innerHTML = `
+        <div class="popover-header">
+          <div class="popover-title-row">
+            <span class="popover-icon">💰</span>
+            <div>
+              <div class="popover-title">Onde o Saldo foi Idealizado</div>
+              <div class="popover-sub">Composição visual da formação do seu saldo</div>
+            </div>
+          </div>
+          <span class="popover-badge ${statusClass}">${statusBadge}</span>
+        </div>
+
+        <!-- Stacked Waterfall Progress Bar -->
+        <div class="waterfall-track">
+          <div class="waterfall-segment fixed" style="width: ${fixedPct}%;" title="Gastos Fixos (${fixedPct}%)"></div>
+          <div class="waterfall-segment var" style="width: ${varPct}%;" title="Gastos Variáveis (${varPct}%)"></div>
+          <div class="waterfall-segment inv" style="width: ${invPct}%;" title="Investimentos (${invPct}%)"></div>
+          <div class="waterfall-segment net" style="width: ${balPct}%;" title="Saldo Líquido (${balPct}%)"></div>
+        </div>
+
+        <div class="chart-legend-grid">
+          <div class="legend-item"><span class="legend-bullet" style="background: #f59e0b;"></span><span>Fixos (${fixedPct}%)</span></div>
+          <div class="legend-item"><span class="legend-bullet" style="background: #f43f5e;"></span><span>Variáveis (${varPct}%)</span></div>
+          <div class="legend-item"><span class="legend-bullet" style="background: #8b5cf6;"></span><span>Aportes (${invPct}%)</span></div>
+          <div class="legend-item"><span class="legend-bullet" style="background: #10b981;"></span><span>Saldo (${balPct}%)</span></div>
+        </div>
+
+        <div class="popover-breakdown-table">
+          <div class="breakdown-line">
+            <span>⬆️ Receita Base do Período</span>
+            <strong style="color: var(--color-gain);">+${formatBRL(baseIncome)}</strong>
+          </div>
+          <div class="breakdown-line">
+            <span>🏠 Gastos Fixos Comprometidos</span>
+            <strong style="color: #f59e0b;">-${formatBRL(fixedExp)}</strong>
+          </div>
+          <div class="breakdown-line">
+            <span>🛒 Gastos Variáveis Lançados</span>
+            <strong style="color: var(--color-expense);">-${formatBRL(varExp)}</strong>
+          </div>
+          ${investments > 0 ? `
+          <div class="breakdown-line">
+            <span>🛡️ Investimentos & Aportes</span>
+            <strong style="color: var(--color-invest);">-${formatBRL(investments)}</strong>
+          </div>` : ''}
+          <div class="breakdown-line total">
+            <span>💵 Saldo Líquido em Caixa</span>
+            <strong style="font-size: 0.95rem; color: ${totalBalance >= 0 ? 'var(--color-gain)' : 'var(--color-expense)'};">
+              ${formatBRL(totalBalance)}
+            </strong>
+          </div>
+        </div>
+
+        <div class="trocado-tip-bubble">
+          <span class="trocado-tip-avatar">🪙</span>
+          <div class="trocado-tip-text">
+            <strong>Trocado explica:</strong> ${trocadoTip}
+          </div>
+        </div>
+      `;
+    }
+
+    // 2. Onde mais ganhei
+    function renderGainsPopover(metrics) {
+      const container = document.getElementById('popoverGainsContent');
+      if (!container) return;
+
+      const currentTxs = getMonthTransactions().filter(t => t.type === 'ganho');
+      const totalGains = metrics.totalGains;
+
+      const gainCats = {};
+      currentTxs.forEach(t => {
+        gainCats[t.category] = (gainCats[t.category] || 0) + parseFloat(t.amount);
+      });
+
+      const catNames = Object.keys(gainCats);
+
+      if (totalGains === 0 || catNames.length === 0) {
+        container.innerHTML = `
+          <div class="popover-header">
+            <div class="popover-title-row">
+              <span class="popover-icon">⬆️</span>
+              <div>
+                <div class="popover-title">Onde Mais Ganhei</div>
+                <div class="popover-sub">Fontes de renda e entradas do mês</div>
+              </div>
+            </div>
+            <span class="popover-badge info">Estimada</span>
+          </div>
+
+          <div class="popover-highlight-pill gain">
+            💼 <strong>Renda planejada no perfil:</strong> ${formatBRL(profile.income || 3500)}
+          </div>
+
+          <p style="font-size: 0.77rem; color: var(--text-muted); margin-bottom: 12px;">
+            Você ainda não registrou entradas manuais neste mês. Adicione seus ganhos para gerar o ranking detalhado das suas vertentes de renda!
+          </p>
+
+          <div class="trocado-tip-bubble">
+            <span class="trocado-tip-avatar">🪙</span>
+            <div class="trocado-tip-text">
+              <strong>Trocado avisa:</strong> Que tal abrir uma nova fonte de renda extra hoje? Veja opções práticas na opção <em>Como Fazer Dinheiro</em>!
+            </div>
+          </div>
+
+          <button class="popover-btn-link" onclick="openMakeMoneyModal()">
+            🚀 Como Fazer Dinheiro (Renda Extra)
+          </button>
+        `;
+        return;
+      }
+
+      catNames.sort((a, b) => gainCats[b] - gainCats[a]);
+      const topCat = catNames[0];
+      const topVal = gainCats[topCat];
+      const topPct = Math.round((topVal / totalGains) * 100);
+
+      let barsHtml = '';
+      const colors = ['#10b981', '#06b6d4', '#8b5cf6', '#3b82f6', '#f59e0b', '#ec4899'];
+      catNames.forEach((cat, idx) => {
+        const val = gainCats[cat];
+        const pct = Math.round((val / totalGains) * 100);
+        const col = colors[idx % colors.length];
+        barsHtml += `
+          <div class="mini-bar-row">
+            <div class="mini-bar-info">
+              <span>${CATEGORY_ICONS[cat] || '💼'} ${escapeHtml(cat)}</span>
+              <span>${formatBRL(val)} <small style="color: var(--text-subtle);">(${pct}%)</small></span>
+            </div>
+            <div class="mini-bar-track">
+              <div class="mini-bar-fill" style="width: ${pct}%; background: ${col};"></div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="popover-header">
+          <div class="popover-title-row">
+            <span class="popover-icon">⬆️</span>
+            <div>
+              <div class="popover-title">Onde Mais Ganhei</div>
+              <div class="popover-sub">Principais vertentes da sua receita</div>
+            </div>
+          </div>
+          <span class="popover-badge gain">${formatBRL(totalGains)}</span>
+        </div>
+
+        <div class="popover-highlight-pill gain">
+          🏆 <strong>Maior vertente:</strong> ${CATEGORY_ICONS[topCat] || ''} ${escapeHtml(topCat)} (${topPct}% do total)
+        </div>
+
+        <div class="mini-bar-list">
+          ${barsHtml}
+        </div>
+
+        <div class="trocado-tip-bubble">
+          <span class="trocado-tip-avatar">🪙</span>
+          <div class="trocado-tip-text">
+            <strong>Dica do Trocado:</strong> Diversificar entradas é a maior defesa financeira! Descubra novas vertentes no botão abaixo.
+          </div>
+        </div>
+
+        <button class="popover-btn-link" onclick="openMakeMoneyModal()">
+          🚀 Como Fazer Dinheiro (Opções no Mercado)
+        </button>
+      `;
+    }
+
+    // 3. Onde mais gastei
+    function renderExpensesPopover(metrics) {
+      const container = document.getElementById('popoverExpensesContent');
+      if (!container) return;
+
+      const totalExp = metrics.totalExpenses;
+      const categories = Object.keys(metrics.categoryExpenses);
+
+      if (totalExp === 0 || categories.length === 0) {
+        container.innerHTML = `
+          <div class="popover-header">
+            <div class="popover-title-row">
+              <span class="popover-icon">⬇️</span>
+              <div>
+                <div class="popover-title">Onde Mais Gastei</div>
+                <div class="popover-sub">Raio-X das suas despesas</div>
+              </div>
+            </div>
+            <span class="popover-badge gain">Zero Gastos</span>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--text-muted); padding: 10px 0;">
+            Nenhuma despesa lançada neste mês. Seus bolsos continuam 100% protegidos!
+          </p>
+        `;
+        return;
+      }
+
+      categories.sort((a, b) => metrics.categoryExpenses[b] - metrics.categoryExpenses[a]);
+      const topCat = categories[0];
+      const topAmount = metrics.categoryExpenses[topCat];
+      const topPct = Math.round((topAmount / totalExp) * 100);
+
+      let barsHtml = '';
+      categories.forEach((cat, idx) => {
+        const val = metrics.categoryExpenses[cat];
+        const pct = Math.round((val / totalExp) * 100);
+        const col = CATEGORY_COLORS[idx % CATEGORY_COLORS.length];
+        barsHtml += `
+          <div class="mini-bar-row">
+            <div class="mini-bar-info">
+              <span>${CATEGORY_ICONS[cat] || '📦'} ${escapeHtml(cat)}</span>
+              <span>${formatBRL(val)} <small style="color: var(--text-subtle);">(${pct}%)</small></span>
+            </div>
+            <div class="mini-bar-track">
+              <div class="mini-bar-fill" style="width: ${pct}%; background: ${col};"></div>
+            </div>
+          </div>
+        `;
+      });
+
+      const potentialSaving = topAmount * 0.15;
+
+      container.innerHTML = `
+        <div class="popover-header">
+          <div class="popover-title-row">
+            <span class="popover-icon">⬇️</span>
+            <div>
+              <div class="popover-title">Onde Mais Gastei</div>
+              <div class="popover-sub">Ranking das vertentes de saída</div>
+            </div>
+          </div>
+          <span class="popover-badge expense">${formatBRL(totalExp)}</span>
+        </div>
+
+        <div class="popover-highlight-pill danger">
+          🚨 <strong>Maior vilão:</strong> ${CATEGORY_ICONS[topCat] || ''} ${escapeHtml(topCat)} (${formatBRL(topAmount)} • ${topPct}%)
+        </div>
+
+        <div class="mini-bar-list">
+          ${barsHtml}
+        </div>
+
+        <div class="trocado-tip-bubble">
+          <span class="trocado-tip-avatar">🪙</span>
+          <div class="trocado-tip-text">
+            <strong>Trocado alerta:</strong> Cortar apenas 15% em <strong>${escapeHtml(topCat)}</strong> já devolve <strong>${formatBRL(potentialSaving)}</strong> direto pro seu cofre da 4ª semana!
+          </div>
+        </div>
+      `;
+    }
+
+    // 4. Como eu chego na 4ª semana com dinheiro no bolso
+    function renderReservePopover(metrics) {
+      const container = document.getElementById('popoverReserveContent');
+      if (!container) return;
+
+      const targetReserve = metrics.targetReserve;
+      const ceiling = metrics.weeklyCeiling;
+      const w1 = metrics.weekExpenses[1] || 0;
+      const w2 = metrics.weekExpenses[2] || 0;
+      const w3 = metrics.weekExpenses[3] || 0;
+      const protectedReserve = metrics.currentProtectedReserve;
+
+      const w1Pct = ceiling > 0 ? Math.min(100, Math.round((w1 / ceiling) * 100)) : 0;
+      const w2Pct = ceiling > 0 ? Math.min(100, Math.round((w2 / ceiling) * 100)) : 0;
+      const w3Pct = ceiling > 0 ? Math.min(100, Math.round((w3 / ceiling) * 100)) : 0;
+
+      const getBarColor = (pct) => pct <= 75 ? '#10b981' : (pct <= 100 ? '#f59e0b' : '#f43f5e');
+
+      container.innerHTML = `
+        <div class="popover-header">
+          <div class="popover-title-row">
+            <span class="popover-icon">🔒</span>
+            <div>
+              <div class="popover-title">Como Chego na 4ª Sem com Bolso Cheio</div>
+              <div class="popover-sub">O mapa do cofre intacto no fim do mês</div>
+            </div>
+          </div>
+          <span class="popover-badge gold">Meta: ${profile.reservePercent}%</span>
+        </div>
+
+        <div class="popover-highlight-pill gold">
+          🛡️ <strong>Cofre Alvo da 4ª Semana:</strong> ${formatBRL(targetReserve)} protegidos!
+        </div>
+
+        <!-- 4 Weeks Stepper Roadmap -->
+        <div class="roadmap-weeks-list">
+          <div class="roadmap-week-item">
+            <div class="roadmap-week-top">
+              <span>🗓️ Semana 1 (Dias 01 a 07)</span>
+              <span>${formatBRL(w1)} / teto ${formatBRL(ceiling)}</span>
+            </div>
+            <div class="mini-bar-track">
+              <div class="mini-bar-fill" style="width: ${w1Pct}%; background: ${getBarColor(w1Pct)};"></div>
+            </div>
+          </div>
+
+          <div class="roadmap-week-item">
+            <div class="roadmap-week-top">
+              <span>🗓️ Semana 2 (Dias 08 a 14)</span>
+              <span>${formatBRL(w2)} / teto ${formatBRL(ceiling)}</span>
+            </div>
+            <div class="mini-bar-track">
+              <div class="mini-bar-fill" style="width: ${w2Pct}%; background: ${getBarColor(w2Pct)};"></div>
+            </div>
+          </div>
+
+          <div class="roadmap-week-item">
+            <div class="roadmap-week-top">
+              <span>🗓️ Semana 3 (Dias 15 a 21)</span>
+              <span>${formatBRL(w3)} / teto ${formatBRL(ceiling)}</span>
+            </div>
+            <div class="mini-bar-track">
+              <div class="mini-bar-fill" style="width: ${w3Pct}%; background: ${getBarColor(w3Pct)};"></div>
+            </div>
+          </div>
+
+          <div class="roadmap-week-item gold">
+            <div class="roadmap-week-top">
+              <span style="color: #fbbf24; font-weight: 800;">🎉 Semana 4 (Dia 22 ao Fim)</span>
+              <strong style="color: #fbbf24;">${formatBRL(protectedReserve)} no bolso!</strong>
+            </div>
+            <small style="color: var(--text-muted); font-size: 0.72rem; display: block; margin-top: 2px;">
+              Sua reserva protegida contra cartões e sufocos.
+            </small>
+          </div>
+        </div>
+
+        <div class="trocado-tip-bubble">
+          <span class="trocado-tip-avatar">🪙</span>
+          <div class="trocado-tip-text">
+            <strong>O Segredo do Pão Duro:</strong> Se você não estourar o teto livre de <strong>${formatBRL(ceiling)}</strong> nas 3 primeiras semanas, a 4ª semana chega com 100% da sua reserva salva no bolso!
+          </div>
+        </div>
+      `;
+    }
+
+    /* ========================================================
+       COMO FAZER DINHEIRO & YOUTUBE PLAYLIST FUNCTIONS
+       ======================================================== */
+    function openMakeMoneyModal() {
+      closeAssistantModal();
+      const currentUrl = getSavedYoutubePlaylist();
+      const input = document.getElementById('playlistUrlInput');
+      if (input) input.value = currentUrl;
+      const btn = document.getElementById('btnOpenYoutubePlaylist');
+      if (btn) btn.href = currentUrl;
+
+      document.getElementById('makeMoneyModal').classList.add('show');
+    }
+
+    function closeMakeMoneyModal() {
+      document.getElementById('makeMoneyModal').classList.remove('show');
+    }
+
+    function toggleEditPlaylistLink() {
+      const box = document.getElementById('playlistConfigBox');
+      if (box) box.classList.toggle('open');
+    }
+
+    function getSavedYoutubePlaylist() {
+      return localStorage.getItem(STORAGE_KEY_YOUTUBE) || 'https://www.youtube.com/results?search_query=como+fazer+renda+extra+aulas+dicas';
+    }
+
+    function saveYoutubePlaylist() {
+      const input = document.getElementById('playlistUrlInput');
+      let val = input.value.trim();
+      if (!val) {
+        val = 'https://www.youtube.com/results?search_query=como+fazer+renda+extra+aulas+dicas';
+      }
+      localStorage.setItem(STORAGE_KEY_YOUTUBE, val);
+      const btn = document.getElementById('btnOpenYoutubePlaylist');
+      if (btn) btn.href = val;
+      toggleEditPlaylistLink();
+      showToast('Link da playlist atualizado com sucesso! 📺');
+    }
+
+    function openYoutubePlaylist(e) {
+      const url = getSavedYoutubePlaylist();
+      window.open(url, '_blank');
+      if (e) e.preventDefault();
+    }
+
+    function startAddExtraIncome() {
+      closeMakeMoneyModal();
+      openTransactionModal();
+      setTxType('ganho');
+      document.getElementById('txCategory').value = 'Freelance';
+      document.getElementById('txDesc').value = 'Renda Extra: ';
+    }
+
+    /* ========================================================
+       MODALS & TRANSACTION HANDLING
+       ======================================================== */
+    function openTransactionModal(editTxId = null) {
+      const modal = document.getElementById('txModal');
+      const title = document.getElementById('txModalTitle');
+      const form = document.getElementById('txForm');
+      form.reset();
+
+      // Default date to today
+      document.getElementById('txDate').value = new Date().toISOString().split('T')[0];
+
+      if (editTxId) {
+        title.innerText = 'Editar Lançamento';
+        const tx = transactions.find(t => t.id === editTxId);
+        if (tx) {
+          document.getElementById('txId').value = tx.id;
+          document.getElementById('txAmount').value = tx.amount;
+          document.getElementById('txDesc').value = tx.desc;
+          document.getElementById('txDate').value = tx.date;
+          document.getElementById('txMethod').value = tx.method || 'Pix';
+          setTxType(tx.type);
+          document.getElementById('txCategory').value = tx.category;
+        }
+      } else {
+        title.innerText = 'Adicionar Lançamento';
+        document.getElementById('txId').value = '';
+        setTxType('gasto');
+      }
+
+      modal.classList.add('show');
+    }
+
+    function closeTransactionModal() {
+      document.getElementById('txModal').classList.remove('show');
+    }
+
+    function setTxType(type) {
+      activeTxType = type;
+      document.getElementById('txType').value = type;
+
+      const btnExp = document.getElementById('btnTypeExpense');
+      const btnGain = document.getElementById('btnTypeGain');
+      const btnInv = document.getElementById('btnTypeInvest');
+
+      btnExp.className = 'type-btn expense' + (type === 'gasto' ? ' active' : '');
+      btnGain.className = 'type-btn gain' + (type === 'ganho' ? ' active' : '');
+      btnInv.className = 'type-btn invest' + (type === 'investimento' ? ' active' : '');
+
+      // Populate corresponding categories
+      const catSelect = document.getElementById('txCategory');
+      catSelect.innerHTML = '';
+      const list = CATEGORIES[type] || CATEGORIES.gasto;
+      list.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.innerText = `${CATEGORY_ICONS[c] || '•'} ${c}`;
+        catSelect.appendChild(opt);
+      });
+    }
+
+    function saveTransaction(e) {
+      e.preventDefault();
+      const id = document.getElementById('txId').value;
+      const type = document.getElementById('txType').value;
+      const amount = parseFloat(document.getElementById('txAmount').value);
+      const desc = document.getElementById('txDesc').value.trim();
+      const category = document.getElementById('txCategory').value;
+      const date = document.getElementById('txDate').value;
+      const method = document.getElementById('txMethod').value;
+
+      if (!amount || amount <= 0 || !desc || !date) {
+        showToast('Preencha os campos obrigatórios corretamente.');
+        return;
+      }
+
+      if (id) {
+        // Edit existing
+        const idx = transactions.findIndex(t => t.id === id);
+        if (idx !== -1) {
+          transactions[idx] = { id, type, amount, desc, category, date, method };
+        }
+      } else {
+        // Create new
+        const newTx = {
+          id: 'tx-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+          type,
+          amount,
+          desc,
+          category,
+          date,
+          method
+        };
+        transactions.unshift(newTx);
+      }
+
+      saveTransactionsToStorage();
+      closeTransactionModal();
+
+      // If transaction date is in another month, optionally switch
+      const txMonthKey = date.substr(0, 7);
+      if (txMonthKey !== currentMonthYear) {
+        // check if month exists in select
+        const exists = Array.from(document.getElementById('monthSelect').options).some(o => o.value === txMonthKey);
+        if (exists) {
+          document.getElementById('monthSelect').value = txMonthKey;
+          currentMonthYear = txMonthKey;
+        }
+      }
+
+      renderApp();
+      updateAssistantDiagnosis();
+      showToast('Lançamento salvo com sucesso! ✅');
+    }
+
+    function deleteTransaction(id) {
+      if (confirm('Tem certeza de que deseja excluir este lançamento?')) {
+        transactions = transactions.filter(t => t.id !== id);
+        saveTransactionsToStorage();
+        renderApp();
+        updateAssistantDiagnosis();
+        showToast('Lançamento excluído.');
+      }
+    }
+
+    function filterTransactions(type, btnElement) {
+      currentFilter = type;
+      document.querySelectorAll('.filter-pills .pill-btn').forEach(b => b.classList.remove('active'));
+      if (btnElement) btnElement.classList.add('active');
+      renderTransactionsList();
+    }
+
+    /* ========================================================
+       TABS: APP VIEW VS SPREADSHEET VIEW
+       ======================================================== */
+    function switchView(viewName) {
+      const appView = document.getElementById('appViewContainer');
+      const sheetView = document.getElementById('sheetViewContainer');
+      const tabApp = document.getElementById('tabAppView');
+      const tabSheet = document.getElementById('tabSheetView');
+      const mNavHome = document.getElementById('mNavHome');
+      const mNavSheet = document.getElementById('mNavSheet');
+
+      if (viewName === 'sheet') {
+        appView.style.display = 'none';
+        sheetView.classList.add('active');
+        tabApp.classList.remove('active');
+        tabSheet.classList.add('active');
+        if (mNavHome && mNavSheet) {
+          mNavHome.classList.remove('active');
+          mNavSheet.classList.add('active');
+        }
+      } else {
+        appView.style.display = 'grid';
+        sheetView.classList.remove('active');
+        tabApp.classList.add('active');
+        tabSheet.classList.remove('active');
+        if (mNavHome && mNavSheet) {
+          mNavHome.classList.add('active');
+          mNavSheet.classList.remove('active');
+        }
+      }
+    }
+
+    /* ========================================================
+       PROFILE & ASSISTANT MODALS
+       ======================================================== */
+    function openProfileModal() {
+      document.getElementById('profileModal').classList.add('show');
+    }
+
+    function closeProfileModal() {
+      document.getElementById('profileModal').classList.remove('show');
+    }
+
+    function openAssistantModal() {
+      askAssistant('diagnostico');
+      document.getElementById('assistantModal').classList.add('show');
+    }
+
+    function closeAssistantModal() {
+      document.getElementById('assistantModal').classList.remove('show');
+    }
+
+    /* ========================================================
+       EXCEL CSV EXPORT & BACKUP
+       ======================================================== */
+    function exportToCSV() {
+      const list = getMonthTransactions();
+      if (list.length === 0) {
+        showToast('Nenhum dado cadastrado para exportar neste mês.');
+        return;
+      }
+
+      // Format for Brazilian Excel: UTF-8 BOM, semicolon delimiter, comma as decimal
+      let csvContent = '\uFEFF'; // BOM
+      csvContent += 'Data;Tipo;Descrição;Categoria;Semana;Forma de Pagamento;Valor (R$)\r\n';
+
+      list.forEach(t => {
+        const week = getTransactionWeek(t.date);
+        const amountStr = t.amount.toFixed(2).replace('.', ',');
+        const descClean = `"${t.desc.replace(/"/g, '""')}"`;
+        const catClean = `"${t.category.replace(/"/g, '""')}"`;
+        const methodClean = `"${(t.method || '').replace(/"/g, '""')}"`;
+
+        csvContent += `${t.date};${t.type};${descClean};${catClean};Semana ${week};${methodClean};${amountStr}\r\n`;
+      });
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `PaoDuro_Financas_Planilha_${currentMonthYear}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('Planilha Excel (.csv) gerada com sucesso! 📊');
+    }
+
+    function exportJSONBackup() {
+      const data = {
+        profile,
+        transactions,
+        version: '2.0',
+        appName: 'Pao Duro Financas',
+        exportDate: new Date().toISOString()
+      };
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `PaoDuro_Financas_Backup_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('Backup JSON exportado com sucesso! 💾');
+    }
+
+    function importJSONBackup(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported.profile) profile = imported.profile;
+          if (Array.isArray(imported.transactions)) transactions = imported.transactions;
+
+          localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(profile));
+          saveTransactionsToStorage();
+          loadProfile();
+          renderApp();
+          updateAssistantDiagnosis();
+          showToast('Backup restaurado com sucesso! 🎉');
+        } catch (err) {
+          alert('Arquivo de backup inválido.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    /* ========================================================
+       THEME & UTILITIES
+       ======================================================== */
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem(STORAGE_KEY_THEME, next);
+      showToast(`Modo ${next === 'light' ? 'Claro' : 'Escuro'} ativado`);
+    }
+
+    function loadTheme() {
+      const saved = localStorage.getItem(STORAGE_KEY_THEME) || localStorage.getItem(LEGACY_STORAGE_THEME);
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    }
+
+    function formatBRL(val) {
+      const num = parseFloat(val) || 0;
+      return num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Register Service Worker if hosted
+    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+      navigator.serviceWorker.register('sw.js').catch(err => console.log('SW register fail', err));
+    }
+  </script>
+</body>
+</html>

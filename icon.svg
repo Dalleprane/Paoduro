@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19" />
+      <stop offset="50%" stop-color="#131b2e" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="40%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="breadGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a" />
+      <stop offset="50%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#92400e" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Rounded Squircle -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" />
+  <rect width="504" height="504" x="4" y="4" rx="124" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+
+  <!-- Outer Golden Halo -->
+  <circle cx="256" cy="256" r="195" fill="none" stroke="url(#goldGrad)" stroke-width="6" opacity="0.4" />
+  <circle cx="256" cy="256" r="185" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6" stroke-dasharray="12 8" />
+
+  <!-- Shield Base for Security & Reserve -->
+  <path d="M256 90 L395 145 V265 C395 355 332 425 256 450 C180 425 117 355 117 265 V145 Z" fill="url(#emeraldGrad)" opacity="0.22" filter="url(#glow)" />
+  <path d="M256 90 L395 145 V265 C395 355 332 425 256 450 C180 425 117 355 117 265 V145 Z" fill="none" stroke="url(#emeraldGrad)" stroke-width="5" />
+
+  <!-- Mascot: Golden Coin "Trocado" & Pão Duro Emblem -->
+  <circle cx="256" cy="265" r="120" fill="url(#goldGrad)" filter="url(#glow)" />
+  <circle cx="256" cy="265" r="108" fill="#131b2e" />
+  <circle cx="256" cy="265" r="98" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-dasharray="6 4" />
+
+  <!-- Bread (Pão Francês / Croissant) Silhouette inside Coin -->
+  <!-- Cute stylized bread / cofre motif -->
+  <path d="M190 270 C190 235, 230 215, 256 215 C282 215, 322 235, 322 270 C322 295, 290 315, 256 315 C222 315, 190 295, 190 270 Z" fill="url(#breadGrad)" />
+  <!-- Bread Score lines (cortes do pão) -->
+  <path d="M225 235 Q230 265 220 295" stroke="#fef3c7" stroke-width="4" stroke-linecap="round" fill="none" />
+  <path d="M256 230 Q260 265 256 300" stroke="#fef3c7" stroke-width="4.5" stroke-linecap="round" fill="none" />
+  <path d="M287 235 Q282 265 292 295" stroke="#fef3c7" stroke-width="4" stroke-linecap="round" fill="none" />
+
+  <!-- Coin Sparks & Stars -->
+  <polygon points="256,60 262,75 278,75 265,85 270,100 256,90 242,100 247,85 234,75 250,75" fill="#fef08a" />
+  <circle cx="380" cy="120" r="5" fill="#fbbf24" />
+  <circle cx="130" cy="120" r="5" fill="#34d399" />
+  <circle cx="395" cy="380" r="4" fill="#fbbf24" />
+  <circle cx="115" cy="380" r="4" fill="#34d399" />
+
+  <!-- Friendly Ribbon Banner: PÃO DURO -->
+  <path d="M140 375 L256 360 L372 375 L360 410 L256 395 L152 410 Z" fill="url(#goldGrad)" />
+  <text x="256" y="392" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="900" fill="#0b0f19" text-anchor="middle" letter-spacing="3">PÃO DURO</text>
+  <text x="256" y="430" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#34d399" text-anchor="middle" letter-spacing="5">FINANÇAS</text>
+</svg>

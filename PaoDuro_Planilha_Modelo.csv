@@ -1,0 +1,15 @@
+Data;Tipo;Descrição;Categoria;Semana;Forma de Pagamento;Valor (R$)
+2026-11-01;ganho;"Salário Mensal";"Salário";Semana 1;"Transferência";3500,00
+2026-11-02;gasto;"Aluguel e Condomínio";"Moradia";Semana 1;"Boleto";1100,00
+2026-11-03;gasto;"Conta de Energia / Luz";"Moradia";Semana 1;"Pix";145,30
+2026-11-04;gasto;"Supermercado Semanal";"Alimentação";Semana 1;"Cartão de Crédito";210,40
+2026-11-05;investimento;"Aporte Reserva de Emergência";"Reserva de Emergência";Semana 1;"Pix";350,00
+2026-11-07;ganho;"Venda de Roupas no Enjoei (Extra)";"Venda";Semana 1;"Pix";120,00
+2026-11-09;gasto;"Combustível";"Transporte";Semana 2;"Cartão de Débito";120,00
+2026-11-11;gasto;"Feira & Hortifruti";"Alimentação";Semana 2;"Pix";78,50
+2026-11-12;gasto;"Farmácia & Vitaminas";"Saúde";Semana 2;"Cartão de Crédito";65,00
+2026-11-14;ganho;"Freelance de Design no Canva (Extra)";"Freelance";Semana 2;"Pix";250,00
+2026-11-16;gasto;"Supermercado Semanal";"Alimentação";Semana 3;"Cartão de Crédito";195,00
+2026-11-18;gasto;"Lazer / Cinema e Jantar";"Lazer";Semana 3;"Cartão de Crédito";110,00
+2026-11-23;gasto;"Padaria & Lanches";"Alimentação";Semana 4;"Pix";45,00
+
